@@ -10,7 +10,7 @@ const SEASON = 2024;
 const MAX_PAGES_PER_TEAM = 2;
 const DELAY_MS = 7000;
 
-// Lista de Times (Brasil, Arábia, Europa)
+// Lista de Times
 const TEAMS = [
   // 🇧🇷 BRASILEIRÃO
   126, 121, 127, 133, 120, 124, 125, 131, 130, 119, 128, 1062,
@@ -53,28 +53,42 @@ async function fetchTeamPlayers(teamId) {
       if (page <= MAX_PAGES_PER_TEAM) await delay(2000);
     }
 
-    // --- FILTRAGEM E MAPEAMENTO ---
+    // --- CORREÇÃO PRINCIPAL AQUI ---
     const elitePlayers = allRawPlayers
+      .map((item) => {
+        // 1. Encontra a estatística ESPECÍFICA do time que estamos buscando agora
+        // Isso evita pegar dados de times anteriores (ex: Japão)
+        const teamStats = item.statistics.find(
+          (stat) => stat.team.id === teamId,
+        );
+
+        // Se por algum motivo não achar, ignora
+        if (!teamStats) return null;
+
+        return {
+          player: item.player,
+          stats: teamStats, // Usaremos essa stat específica daqui pra frente
+        };
+      })
+      .filter((item) => item !== null) // Remove os nulos
       .filter(
-        (item) => item.player.photo && item.statistics[0].games.minutes > 0,
+        (item) => item.player.photo && item.stats.games.minutes > 0, // Filtra minutos baseado no time correto
       )
-      .sort(
-        (a, b) => b.statistics[0].games.minutes - a.statistics[0].games.minutes,
-      )
+      .sort((a, b) => b.stats.games.minutes - a.stats.games.minutes)
       .slice(0, 18)
       .map((item) => ({
         id: item.player.id,
         name: item.player.name,
         image: item.player.photo,
         hints: [
-          // Dica 1: Posição (Sempre visível)
-          mapPosition(item.statistics[0].games.position),
+          // Dica 1: Posição (Do time correto)
+          mapPosition(item.stats.games.position),
 
-          // Dica 2: Nacionalidade (Revela no 1º erro)
+          // Dica 2: Nacionalidade
           item.player.nationality,
 
-          // Dica 3: Time Atual (Revela no 2º erro - Substituindo o Status)
-          item.statistics[0].team.name,
+          // Dica 3: Time Atual (Do time correto que buscamos)
+          item.stats.team.name,
         ],
       }));
 

@@ -128,7 +128,7 @@ export default function GameBoard({ onQuit }: { onQuit?: () => void }) {
         {/* IMAGEM */}
         <div
           className={`
-          relative w-full aspect-[4/3] 
+          relative w-full aspect-4/3 
           ${gameOver ? "max-h-[30vh]" : "max-h-[40vh]"} 
           rounded-3xl overflow-hidden shadow-xl border-4 
           transition-all duration-500 mb-6 mx-auto
@@ -260,8 +260,8 @@ export default function GameBoard({ onQuit }: { onQuit?: () => void }) {
         )}
       </div>
 
-      <div className="flex-none w-full h-[100px] bg-slate-100 border-t border-slate-200 z-30 animate-in slide-in-from-bottom duration-500">
-        <div className="w-full h-full max-w-[1200px] mx-auto p-2 flex items-center justify-center">
+      <div className="flex-none w-full h-25 bg-slate-100 border-t border-slate-200 z-30 animate-in slide-in-from-bottom duration-500">
+        <div className="w-full h-full max-w-300 mx-auto p-2 flex items-center justify-center">
           <AdBanner />
         </div>
       </div>

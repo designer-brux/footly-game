@@ -33,7 +33,7 @@ export default function SearchInput({
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder="Quem é o jogador?"
+        placeholder="Type the player?"
         // Ajustei também o input para combinar com o tema claro (texto escuro e borda mais suave)
         className="w-full bg-transparent border-b-2 border-slate-200 py-3 px-2 outline-none focus:border-[#00D656] transition-colors text-lg tracking-wide uppercase placeholder:text-slate-400 text-slate-800 font-bold"
       />
