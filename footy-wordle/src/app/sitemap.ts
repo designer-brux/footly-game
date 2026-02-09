@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.footlygame.com.br"; // Seu domínio real
+  const baseUrl = "https://www.footlygame.com"; // Seu domínio real
 
   return [
     {
