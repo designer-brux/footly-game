@@ -178,7 +178,7 @@ export default function GameBoard({ onQuit }: { onQuit?: () => void }) {
                 <p className="text-slate-500 uppercase text-[10px] font-bold tracking-widest">
                   The player was:
                 </p>
-                <h2 className="text-2xl font-black text-[#006B52] tracking-tighter italic truncate max-w-xs mx-auto">
+                <h2 className="text-2xl font-black text-[#006B52] tracking-tighter truncate max-w-xs mx-auto">
                   {targetPlayer.name}
                 </h2>
               </div>
@@ -215,7 +215,7 @@ export default function GameBoard({ onQuit }: { onQuit?: () => void }) {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400 font-medium">Club</span>
+              <span className="text-slate-400 font-medium">Attributes</span>
               <span className="font-bold text-slate-800 truncate ml-2">
                 {guesses.length >= 2 ? targetPlayer.hints[2] : "-"}
               </span>
