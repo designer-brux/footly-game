@@ -59,7 +59,7 @@ export default function ShareSection({
 
   const getShareText = () => {
     const icon = won ? "🏆" : "❌";
-    return `Footly #${gameNumber} ${icon}\n⏱️ Tempo: ${time}\n🎯 Tentativas: ${won ? guessesCount : "X"}/3\n\nJogue agora: kickly.vercel.app`;
+    return `Footly #${gameNumber} ${icon}\n⏱️ Tempo: ${time}\n🎯 Tentativas: ${won ? guessesCount : "X"}/3\n\nJogue agora: www.footlygame.com`;
   };
 
   const handleCopyText = () => {
@@ -213,7 +213,7 @@ export default function ShareSection({
               fontSize: isPrint ? "20px" : "14px",
             }}
           >
-            kickly.vercel.app
+            www.footlygame.com
           </p>
         </div>
       </div>
