@@ -5,7 +5,7 @@ import { PLAYERS, Player } from "@/data/players";
 // Para o jogo começar como #1 HOJE, coloque a data de HOJE aqui (AAAA-MM-DD).
 // Lembre-se: O formato deve ser sempre UTC (T00:00:00Z) para evitar fusos.
 // ==============================================================================
-const GAME_EPOCH = new Date("2026-02-04T00:00:00Z");
+const GAME_EPOCH = new Date("2026-02-09T00:00:00Z");
 
 // Calcula quantos dias se passaram desde o início
 export function getDayIndex(): number {
