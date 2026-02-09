@@ -5,10 +5,10 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.footlygame.com"),
-  title: "Footly - Guess the Football Player",
+  title: "Footly - Daily Football Player Guessing Game",
   description:
-    "Adivinhe o jogador de futebol do dia! Um desafio diário para quem ama futebol.",
-  // ... resto das suas configs de metadata
+    "Can you guess the football player? Test your knowledge of Premier League, La Liga, Serie A and Brasileirão stars in this daily trivia challenge.",
+  keywords: ["football", "soccer", "trivia", "game", "quiz", "premier league"],
 };
 
 export default function RootLayout({

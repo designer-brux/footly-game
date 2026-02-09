@@ -260,12 +260,6 @@ export default function GameBoard({ onQuit }: { onQuit?: () => void }) {
         )}
       </div>
 
-      <div className="flex-none w-full h-25 bg-slate-100 border-t border-slate-200 z-30 animate-in slide-in-from-bottom duration-500">
-        <div className="w-full h-full max-w-300 mx-auto p-2 flex items-center justify-center">
-          <AdBanner />
-        </div>
-      </div>
-
       <ShareSection
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
