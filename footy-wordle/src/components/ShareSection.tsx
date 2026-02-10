@@ -5,35 +5,35 @@ import { X, Download, Copy, MessageCircle } from "lucide-react";
 import { domToPng } from "modern-screenshot";
 import { getGameNumber } from "@/lib/gameLogic";
 
+// Interface atualizada para receber os dados dos 3 jogadores
 interface ShareSectionProps {
   isOpen: boolean;
   onClose: () => void;
-  won: boolean;
-  guessesCount: number;
-  time: string;
+  totalScore: number;
+  results: any[]; // Array com os resultados das rodadas
 }
 
 export default function ShareSection({
   isOpen,
   onClose,
-  won,
-  guessesCount,
-  time,
+  totalScore,
+  results,
 }: ShareSectionProps) {
   const posterRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const gameNumber = getGameNumber();
+
+  // Se der erro no getGameNumber, usa um fallback ou remova essa linha se não tiver a lib
+  const gameNumber = getGameNumber ? getGameNumber() : "Daily";
 
   if (!isOpen) return null;
 
-  // NOVOS LINKS DE IMAGEM (Estáveis)
-  // Win: Estádio iluminado com clima de celebração
   const WIN_BG =
     "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000&auto=format&fit=crop";
-
-  // Lose: Gramado com foco dramático/escuro (Mantido pois funciona)
   const LOSE_BG =
     "https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1000&auto=format&fit=crop";
+
+  // Lógica de vitória: Se fez mais que 0 pontos, consideramos vitória/conclusão
+  const won = totalScore > 0;
 
   const handleDownloadImage = async () => {
     if (!posterRef.current) return;
@@ -51,15 +51,22 @@ export default function ShareSection({
       link.click();
     } catch (err) {
       console.error("Erro ao gerar imagem:", err);
-      alert("Erro de compatibilidade. Tente tirar um print manual!");
+      alert("Erro ao salvar imagem. Tente tirar um print!");
     } finally {
       setIsGenerating(false);
     }
   };
 
+  // Gera o texto formatado com os emojis de medalha
   const getShareText = () => {
-    const icon = won ? "🏆" : "❌";
-    return `Footly #${gameNumber} ${icon}\n⏱️ Tempo: ${time}\n🎯 Tentativas: ${won ? guessesCount : "X"}/3\n\nJogue agora: www.footlygame.com`;
+    const lines = results
+      .map(
+        (r, i) =>
+          `Player ${i + 1}: ${r.isWin ? (r.attempts === 1 ? "🥇" : r.attempts === 2 ? "🥈" : "🥉") : "❌"} (${r.time}s)`,
+      )
+      .join("\n");
+
+    return `Footly #${gameNumber}\n🏆 Score: ${totalScore} pts\n\n${lines}\n\nIt's your turn: www.footlygame.com`;
   };
 
   const handleCopyText = () => {
@@ -73,10 +80,11 @@ export default function ShareSection({
   };
 
   const overlayColor = won
-    ? "rgba(6, 78, 59, 0.85)" // Um pouco mais escuro para garantir leitura no estádio
+    ? "rgba(6, 78, 59, 0.85)"
     : "rgba(127, 29, 29, 0.85)";
   const accentColor = "#00D656";
 
+  // O componente visual que será transformado em imagem
   const PosterVisual = ({ isPrint = false }: { isPrint?: boolean }) => (
     <div
       style={{
@@ -143,9 +151,10 @@ export default function ShareSection({
             lineHeight: 1,
           }}
         >
-          {won ? "VICTORY!" : "GAME OVER"}
+          {won ? "COMPLETED!" : "GAME OVER"}
         </h2>
 
+        {/* CAIXA DE PONTUAÇÃO (Alterado para mostrar SCORE) */}
         <div
           className="rounded-3xl border border-white/20 mx-auto w-full"
           style={{
@@ -157,42 +166,35 @@ export default function ShareSection({
             maxWidth: isPrint ? "300px" : "200px",
           }}
         >
-          <div style={{ marginBottom: isPrint ? "20px" : "12px" }}>
-            <p
-              className="font-bold uppercase"
-              style={{
-                color: "rgba(255,255,255,0.6)",
-                fontSize: isPrint ? "14px" : "10px",
-              }}
-            >
-              Time
-            </p>
-            <p
-              className="font-black text-white"
-              style={{
-                fontSize: isPrint ? "36px" : "24px",
-              }}
-            >
-              {time}
-            </p>
-          </div>
           <div>
             <p
               className="font-bold uppercase"
               style={{
-                color: "rgba(255,255,255,0.6)",
-                fontSize: isPrint ? "14px" : "10px",
+                color: accentColor,
+                fontSize: isPrint ? "16px" : "12px",
+                letterSpacing: "2px",
+                marginBottom: "4px",
               }}
             >
-              Guesses
+              Total Score
             </p>
             <p
               className="font-black text-white"
               style={{
-                fontSize: isPrint ? "36px" : "24px",
+                fontSize: isPrint ? "72px" : "48px",
+                lineHeight: 1,
               }}
             >
-              {won ? `${guessesCount}/3` : "X/3"}
+              {totalScore}
+            </p>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.6)",
+                fontSize: isPrint ? "14px" : "10px",
+                marginTop: "4px",
+              }}
+            >
+              Points
             </p>
           </div>
         </div>
@@ -204,7 +206,7 @@ export default function ShareSection({
               fontSize: isPrint ? "24px" : "16px",
             }}
           >
-            Now it's your turn!
+            Can you beat my score?
           </p>
           <p
             className="font-bold"
@@ -221,7 +223,7 @@ export default function ShareSection({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl flex flex-col relative">
         <button
           onClick={onClose}
@@ -277,6 +279,7 @@ export default function ShareSection({
         </div>
       </div>
 
+      {/* Versão Invisível para Gerar o Print (Alta Resolução) */}
       <div
         style={{
           position: "fixed",

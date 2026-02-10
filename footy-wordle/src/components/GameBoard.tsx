@@ -1,272 +1,390 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import SearchInput from "./SearchInput";
-import { useDailyGame } from "@/hooks/useDailyGame";
-import confetti from "canvas-confetti";
-import { Clock, Share2, XCircle, CheckCircle } from "lucide-react"; // Adicionei ícones para os badges
-import AdBanner from "./AdBanner";
+import { useState, useEffect, useRef } from "react";
+import { PLAYERS, Player } from "@/data/players";
+import { Share2, Search, XCircle } from "lucide-react";
+import SecureImage from "./SecureImage";
 import ShareSection from "./ShareSection";
 
-export default function GameBoard({ onQuit }: { onQuit?: () => void }) {
-  const {
-    targetPlayer,
-    guesses,
-    setGuesses,
-    gameOver,
-    setGameOver,
-    won,
-    setWon,
-    isLoading,
-  } = useDailyGame();
+// --- LÓGICA DE PONTUAÇÃO ---
+const calculatePoints = (attempts: number, time: number, isWin: boolean) => {
+  if (!isWin) return 0;
 
-  const [timer, setTimer] = useState(0);
-  const [isShareOpen, setIsShareOpen] = useState(false);
+  let attemptPoints = 0;
+  if (attempts === 1) attemptPoints = 50;
+  else if (attempts === 2) attemptPoints = 25;
+  else if (attempts === 3) attemptPoints = 10;
 
+  let timePoints = 0;
+  if (time < 15) timePoints = 100;
+  else if (time <= 30) timePoints = 50;
+  else if (time <= 45) timePoints = 25;
+  else timePoints = 10;
+
+  return attemptPoints + timePoints;
+};
+
+// --- SELEÇÃO DIÁRIA ---
+const getDailyPlayers = () => {
+  const today = new Date().toISOString().split("T")[0].replace(/-/g, "");
+  const seed = parseInt(today);
+  const p1 = PLAYERS[seed % PLAYERS.length];
+  const p2 = PLAYERS[(seed + 13) % PLAYERS.length];
+  const p3 = PLAYERS[(seed + 27) % PLAYERS.length];
+  return [p1, p2, p3];
+};
+
+interface RoundResult {
+  player: Player;
+  attempts: number;
+  time: number;
+  score: number;
+  isWin: boolean;
+}
+
+export default function GameBoard({ onQuit }: { onQuit: () => void }) {
+  // ESTADOS
+  const [dailyQueue, setDailyQueue] = useState<Player[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [results, setResults] = useState<RoundResult[]>([]);
+  const [isFinished, setIsFinished] = useState(false);
+
+  // ESTADOS DA RODADA
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<Player[]>([]);
+  const [attempts, setAttempts] = useState(0);
+  const [wrongGuesses, setWrongGuesses] = useState<string[]>([]);
+  const [time, setTime] = useState(0);
+  const [isRoundOver, setIsRoundOver] = useState(false);
+  const [isWin, setIsWin] = useState(false);
+
+  // ESTADO DO MODAL DE SHARE
+  const [showShareModal, setShowShareModal] = useState(false);
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 1. INICIALIZAÇÃO E VERIFICAÇÃO DE JOGO JÁ JOGADO
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (!gameOver && targetPlayer && !isLoading) {
-      interval = setInterval(() => {
-        setTimer((t) => t + 1);
-      }, 1000);
+    // Carrega os jogadores do dia
+    setDailyQueue(getDailyPlayers());
+
+    // Verifica se já jogou hoje
+    const today = new Date().toISOString().split("T")[0];
+    const savedData = localStorage.getItem("footly_daily_status");
+
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      // Se a data salva for igual a hoje E o jogo estiver finalizado
+      if (parsed.date === today && parsed.finished) {
+        setResults(parsed.results);
+        setIsFinished(true); // Pula direto para a tela de resultados
+      }
     }
-    return () => clearInterval(interval);
-  }, [gameOver, targetPlayer, isLoading]);
+  }, []);
 
-  const formatTime = (s: number) => {
-    const mins = Math.floor(s / 60);
-    const secs = s % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const handleSelect = (selectedName: string) => {
-    if (gameOver || !targetPlayer) return;
-    const newGuesses = [...guesses, selectedName];
-    setGuesses(newGuesses);
-    if (selectedName.toLowerCase() === targetPlayer.name.toLowerCase()) {
-      setWon(true);
-      setGameOver(true);
-      confetti();
-    } else if (newGuesses.length >= 3) {
-      setGameOver(true);
+  // 2. SALVAR QUANDO TERMINAR
+  useEffect(() => {
+    if (isFinished && results.length > 0) {
+      const today = new Date().toISOString().split("T")[0];
+      localStorage.setItem(
+        "footly_daily_status",
+        JSON.stringify({
+          date: today,
+          finished: true,
+          results: results,
+        }),
+      );
     }
-  };
+  }, [isFinished, results]);
 
-  const getBlurClass = () => {
-    if (gameOver) return "blur-none";
-    if (guesses.length === 0) return "blur-2xl";
-    if (guesses.length === 1) return "blur-xl";
-    if (guesses.length === 2) return "blur-md";
-    return "blur-none";
-  };
-
-  // Cores do Contador
-  const getCounterColor = () => {
-    if (won) return "bg-green-100 text-green-700 border-green-200";
-
-    switch (guesses.length) {
-      case 0:
-        return "bg-slate-100 text-slate-700 border-slate-200";
-      case 1:
-        return "bg-yellow-100 text-yellow-700 border-yellow-200";
-      case 2:
-        return "bg-orange-100 text-orange-700 border-orange-200";
-      case 3:
-        return "bg-red-100 text-red-700 border-red-200";
-      default:
-        return "bg-slate-100 text-slate-700";
+  // Timer
+  useEffect(() => {
+    if (!isRoundOver && !isFinished) {
+      timerRef.current = setInterval(() => setTime((t) => t + 1), 1000);
     }
-  };
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isRoundOver, isFinished]);
 
-  // Cores da Borda da Imagem
-  const getImageBorderColor = () => {
-    if (won) return "border-green-500 shadow-green-200";
-    if (gameOver && !won) return "border-red-600 shadow-red-200";
+  // Autocomplete
+  useEffect(() => {
+    if (query.length > 1 && !isRoundOver) {
+      const filtered = PLAYERS.filter((p) =>
+        p.name.toLowerCase().includes(query.toLowerCase()),
+      ).slice(0, 5);
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  }, [query, isRoundOver]);
 
-    switch (guesses.length) {
-      case 0:
-        return "border-white shadow-slate-200";
-      case 1:
-        return "border-yellow-400 shadow-yellow-100";
-      case 2:
-        return "border-orange-500 shadow-orange-100";
-      case 3:
-        return "border-red-600 shadow-red-200";
-      default:
-        return "border-white";
+  const currentPlayer = dailyQueue[currentIndex];
+
+  const handleGuess = (selectedName: string) => {
+    if (isRoundOver) return;
+    const newAttempts = attempts + 1;
+    setAttempts(newAttempts);
+    setQuery("");
+    setSuggestions([]);
+
+    if (selectedName.toLowerCase() === currentPlayer.name.toLowerCase()) {
+      finishRound(true, newAttempts);
+    } else {
+      setWrongGuesses((prev) => [...prev, selectedName]);
+      if (newAttempts >= 3) finishRound(false, newAttempts);
     }
   };
 
-  if (isLoading || !targetPlayer) {
+  const finishRound = (win: boolean, finalAttempts: number) => {
+    setIsWin(win);
+    setIsRoundOver(true);
+    const roundScore = calculatePoints(finalAttempts, time, win);
+
+    setResults((prev) => [
+      ...prev,
+      {
+        player: currentPlayer,
+        attempts: finalAttempts,
+        time: time,
+        score: roundScore,
+        isWin: win,
+      },
+    ]);
+  };
+
+  const nextPlayer = () => {
+    if (currentIndex < 2) {
+      setCurrentIndex((prev) => prev + 1);
+      setAttempts(0);
+      setWrongGuesses([]);
+      setTime(0);
+      setQuery("");
+      setIsRoundOver(false);
+      setIsWin(false);
+    } else {
+      setIsFinished(true);
+      // O useEffect lá em cima vai capturar essa mudança e salvar no localStorage
+    }
+  };
+
+  const handleShare = () => {
+    setShowShareModal(true);
+  };
+
+  const getBorderColor = () => {
+    if (isRoundOver) return isWin ? "border-[#00D44E]" : "border-red-500";
+    if (attempts === 0) return "border-slate-100";
+    return "border-yellow-400";
+  };
+
+  // --- TELA DE RESULTADOS (Mostrada se acabou ou se já jogou hoje) ---
+  if (isFinished) {
+    const totalScore = results.reduce((acc, curr) => acc + curr.score, 0);
+
     return (
-      <div className="w-full h-dvh flex items-center justify-center text-slate-400">
-        Loading...
+      <div className="flex flex-col items-center w-full max-w-md mx-auto p-6 pb-20 animate-in fade-in">
+        <h2 className="text-3xl font-black text-[#006B52] mb-2 mt-4">
+          GAME OVER
+        </h2>
+        <p className="text-slate-500 font-bold mb-8">
+          Daily Challenge Complete
+        </p>
+
+        <div className="bg-[#006B52] text-white p-6 rounded-2xl w-full text-center mb-8 shadow-lg">
+          <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">
+            Total Score
+          </p>
+          <p className="text-7xl font-black tracking-tighter">{totalScore}</p>
+        </div>
+
+        <div className="w-full space-y-3 mb-8">
+          {results.map((res, i) => (
+            <div
+              key={i}
+              className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={res.player.image}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-slate-200"
+                />
+                <div>
+                  <p className="font-bold text-slate-800 text-sm">
+                    {res.player.name}
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    {res.isWin ? `${res.attempts}/3 attempts` : "Failed"} •{" "}
+                    {res.time}s
+                  </p>
+                </div>
+              </div>
+              <span
+                className={`font-black text-lg ${res.isWin ? "text-[#006B52]" : "text-red-400"}`}
+              >
+                +{res.score}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex gap-4 w-full">
+          <button
+            onClick={handleShare}
+            className="flex-2 h-14 bg-[#00D44E] text-[#1D1B20] rounded-full font-black flex items-center justify-center gap-2 shadow-lg active:scale-95 transition"
+          >
+            <Share2 size={20} /> SHARE RESULTS
+          </button>
+        </div>
+
+        {/* MODAL DE SHARE */}
+        <ShareSection
+          isOpen={showShareModal}
+          onClose={() => setShowShareModal(false)}
+          totalScore={totalScore}
+          results={results}
+        />
       </div>
     );
   }
 
+  if (!currentPlayer) return null;
+
+  // --- TELA DE JOGO ---
   return (
-    <div className="w-full h-dvh flex flex-col bg-white relative">
-      {/* 1. HEADER */}
-      <div className="flex-none w-full max-w-md mx-auto px-6 py-4 z-30 bg-white">
-        <div className="flex justify-between items-center font-bold text-slate-700">
-          <span
-            className={`text-lg px-4 py-1 rounded-full border transition-colors duration-500 ease-in-out ${getCounterColor()}`}
-          >
-            {guesses.length}/3
-          </span>
-          <h2 className="text-[#004D40] text-xl tracking-tight">Challenge</h2>
-          <div className="flex items-center gap-1 text-lg bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-            <Clock size={18} />
-            {formatTime(timer)}
+    <div className="w-full max-w-md mx-auto p-4 pb-20 flex flex-col items-center">
+      {/* 1. Header */}
+      <div className="w-full flex justify-between items-center mb-4">
+        <span className="bg-[#006B52]/10 text-[#006B52] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+          Player {currentIndex + 1}/3
+        </span>
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1">
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className={`w-2 h-2 rounded-full ${attempts > i ? "bg-red-400" : "bg-slate-200"}`}
+              />
+            ))}
           </div>
+          <span className="text-slate-400 font-mono font-bold w-12 text-right">
+            {time}s
+          </span>
         </div>
       </div>
 
-      {/* 2. ÁREA DE ROLAGEM */}
-      <div className="flex-1 overflow-y-auto w-full max-w-md mx-auto px-6 pb-32">
-        {/* IMAGEM */}
-        <div
-          className={`
-          relative w-full aspect-4/3 
-          ${gameOver ? "max-h-[30vh]" : "max-h-[40vh]"} 
-          rounded-3xl overflow-hidden shadow-xl border-4 
-          transition-all duration-500 mb-6 mx-auto
-          ${getImageBorderColor()} 
-        `}
-        >
-          <img
-            src={targetPlayer.image}
-            className={`w-full h-full object-cover transition-all duration-1000 ease-in-out ${getBlurClass()}`}
-            alt="Desafio"
+      {/* 2. Imagem */}
+      <div
+        className={`relative w-full aspect-square bg-slate-100 rounded-3xl overflow-hidden mb-4 shadow-sm border-4 transition-colors duration-300 ${getBorderColor()}`}
+      >
+        <SecureImage
+          src={currentPlayer.image}
+          alt="Player"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Máscara de Blur */}
+        {!isRoundOver && (
+          <div
+            className="absolute inset-0 backdrop-blur-xl bg-white/10"
+            style={{
+              maskImage:
+                "radial-gradient(circle at center, transparent 20%, black 20%)",
+              WebkitMaskImage:
+                "radial-gradient(circle at center, transparent 20%, black 20%)",
+            }}
           />
+        )}
 
-          {!gameOver && (
-            <div
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              style={{
-                maskImage:
-                  "radial-gradient(circle 50px at center, black 100%, transparent 100%)",
-                WebkitMaskImage:
-                  "radial-gradient(circle 50px at center, black 100%, transparent 100%)",
-              }}
-            >
-              <img
-                src={targetPlayer.image}
-                className="w-full h-full object-cover"
-                alt="Foco"
-              />
-            </div>
-          )}
-
-          {gameOver && (
-            <div
-              className={`absolute inset-0 flex items-center justify-center ${won ? "bg-green-500/10" : "bg-red-500/10"} transition-colors duration-1000`}
-            />
-          )}
-        </div>
-
-        {/* INPUT / AÇÃO */}
-        <div className="relative z-20 mb-6">
-          {!gameOver ? (
-            <div className="bg-white rounded-2xl border-2 border-[#00D656]/20 p-1 focus-within:border-[#00D656] transition-colors shadow-lg">
-              <SearchInput onSelect={handleSelect} />
-            </div>
-          ) : (
-            <div className="flex flex-col gap-3 animate-in slide-in-from-bottom-4 items-center">
-              <div className="text-center">
-                <p className="text-slate-500 uppercase text-[10px] font-bold tracking-widest">
-                  The player was:
-                </p>
-                <h2 className="text-2xl font-black text-[#006B52] tracking-tighter truncate max-w-xs mx-auto">
-                  {targetPlayer.name}
-                </h2>
-              </div>
-
-              <button
-                onClick={() => setIsShareOpen(true)}
-                className="w-full py-3 bg-[#00D656] text-white font-black text-lg rounded-full shadow-lg shadow-green-200 active:scale-95 transition-all flex items-center justify-center gap-2"
-              >
-                <Share2 size={20} />
-                Share Result
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* DICAS */}
-        <div className="bg-white border border-[#E8F5E9] rounded-2xl p-4 shadow-sm z-10 relative">
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="text-[#006B52] font-extrabold text-sm uppercase tracking-wide">
-              Hints
-            </h3>
-          </div>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between border-b border-slate-50 pb-1">
-              <span className="text-slate-400 font-medium">Position</span>
-              <span className="font-bold text-slate-800 truncate ml-2">
-                {targetPlayer.hints[0]}
-              </span>
-            </div>
-            <div className="flex justify-between border-b border-slate-50 pb-1">
-              <span className="text-slate-400 font-medium">Nationality</span>
-              <span className="font-bold text-slate-800 truncate ml-2">
-                {guesses.length >= 1 ? targetPlayer.hints[1] : "-"}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-400 font-medium">Attributes</span>
-              <span className="font-bold text-slate-800 truncate ml-2">
-                {guesses.length >= 2 ? targetPlayer.hints[2] : "-"}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* --- NOVO: BADGES DE TENTATIVAS ANTERIORES --- */}
-        {guesses.length > 0 && (
-          <div className="mt-6 z-0 animate-in fade-in slide-in-from-bottom-2">
-            <h3 className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-3 text-center">
-              Players
-            </h3>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {guesses.map((guess, index) => {
-                // Verifica se é o palpite vencedor (apenas se ganhou e for o último)
-                const isWinner = won && index === guesses.length - 1;
-
-                return (
-                  <div
-                    key={index}
-                    className={`
-                      flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border animate-in zoom-in duration-300
-                      ${
-                        isWinner
-                          ? "bg-green-100 text-green-700 border-green-200"
-                          : "bg-red-50 text-red-600 border-red-100"
-                      }
-                    `}
-                  >
-                    {isWinner ? (
-                      <CheckCircle size={12} />
-                    ) : (
-                      <XCircle size={12} />
-                    )}
-                    {guess}
-                  </div>
-                );
-              })}
-            </div>
+        {/* Overlay Resultado */}
+        {isRoundOver && (
+          <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center p-4 animate-in fade-in">
+            <p className="text-white/80 text-xs font-bold uppercase tracking-widest mb-2">
+              The player was
+            </p>
+            <h2 className="text-white text-3xl font-black italic uppercase text-center leading-tight drop-shadow-md pr-2">
+              {currentPlayer.name}
+            </h2>
           </div>
         )}
       </div>
 
-      <ShareSection
-        isOpen={isShareOpen}
-        onClose={() => setIsShareOpen(false)}
-        won={won}
-        guessesCount={guesses.length}
-        time={formatTime(timer)}
-      />
+      {/* 3. Input & Botões */}
+      {!isRoundOver ? (
+        <div className="w-full relative z-50 mb-4">
+          <div className="relative">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Who is this player?"
+              className="w-full h-14 pl-12 pr-4 rounded-xl bg-white border-2 border-slate-200 focus:border-[#006B52] outline-none font-bold text-slate-800 shadow-sm"
+            />
+            <Search
+              className="absolute left-4 top-4 text-slate-400"
+              size={24}
+            />
+          </div>
+          {suggestions.length > 0 && (
+            <ul className="absolute top-full left-0 w-full bg-white rounded-xl mt-2 border border-slate-200 shadow-xl max-h-48 overflow-y-auto divide-y divide-slate-100">
+              {suggestions.map((s) => (
+                <li
+                  key={s.id}
+                  onClick={() => handleGuess(s.name)}
+                  className="px-4 py-3 hover:bg-slate-50 cursor-pointer flex justify-between"
+                >
+                  <span className="font-bold text-slate-700">{s.name}</span>
+                  <span className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">
+                    {s.hints[1]}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ) : (
+        <button
+          onClick={nextPlayer}
+          className="w-full h-14 mb-4 bg-[#006B52] text-white font-black rounded-xl shadow-lg flex items-center justify-center gap-2"
+        >
+          {currentIndex < 2 ? "NEXT PLAYER →" : "SEE FINAL RESULTS"}
+        </button>
+      )}
+
+      {/* 4. Dicas */}
+      <div className="w-full bg-slate-50 rounded-xl p-4 border border-slate-100 mb-4">
+        <div className="space-y-3">
+          {["Position", "Nationality", "Profile"].map((label, i) => (
+            <div
+              key={label}
+              className="flex justify-between items-center border-b border-slate-200 pb-2 last:border-0 last:pb-0"
+            >
+              <span className="text-slate-400 font-bold text-xs uppercase tracking-wider">
+                {label}
+              </span>
+              <span
+                className={`font-bold text-slate-800 text-right transition-all ${attempts >= i || isRoundOver ? "" : "blur-sm opacity-50 select-none"}`}
+              >
+                {currentPlayer.hints[i]}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 5. Erros */}
+      {wrongGuesses.length > 0 && (
+        <div className="w-full flex flex-wrap gap-2 justify-center animate-in fade-in">
+          {wrongGuesses.map((name, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-1 px-3 py-1 bg-red-50 text-red-500 border border-red-100 rounded-full text-xs font-bold"
+            >
+              <XCircle size={12} /> {name}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
