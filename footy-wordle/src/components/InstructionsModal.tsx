@@ -33,9 +33,9 @@ export default function InstructionsModal({
           <li className="flex gap-2">
             <span>•</span> Get hints after each wrong guess
           </li>
-          {/* <li className="flex gap-2">
+          <li className="flex gap-2">
             <span>•</span> Score points based on guesses and time taken
-          </li> */}
+          </li>
           <li className="flex gap-2">
             <span>•</span> Share your results and compete with your friends!
           </li>

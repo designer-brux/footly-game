@@ -73,11 +73,12 @@ export default function Home() {
             <p className="mb-4">
               Welcome to <strong>Footly</strong>. Can you guess the mystery
               football player? Test your knowledge of the{" "}
-              <strong>Premier League, La Liga, and Serie A</strong>.
+              <strong>Premier League, La Liga, Serie A</strong> and other
+              leagues.
             </p>
             <p>
-              Our database is updated for the <strong>2025/2026 season</strong>.
-              Play daily to build your streak!
+              Our database covers the <strong>2024/2025 season</strong> and will
+              soon reflect the current one. Play daily to build your streak!
             </p>
           </article>
 
