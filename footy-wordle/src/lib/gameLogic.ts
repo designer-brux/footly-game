@@ -1,34 +1,54 @@
 import { PLAYERS, Player } from "@/data/players";
 
 // ==============================================================================
-// CONFIGURAÇÃO DO DIA ZERO (GLOBAL UTC)
-// A data de lançamento é fixa. Não altere o 'Z' (UTC).
+// CONFIGURAÇÃO DO DIA ZERO
 // ==============================================================================
-const GAME_EPOCH = new Date("2026-02-09T00:00:00Z");
+// Data de lançamento: 9 de Fevereiro de 2026
+const EPOCH_YEAR = 2026;
+const EPOCH_MONTH = 1; // Fevereiro é 1 (Janeiro é 0)
+const EPOCH_DAY = 9;
 
 /**
- * Calcula o índice do dia baseado no Tempo Universal (UTC).
- * Isso garante que o jogo mude ao mesmo tempo no mundo todo (00:00 UTC).
- * No Brasil (UTC-3), o jogo muda às 21:00 do dia anterior.
+ * 1. LÓGICA DO JOGO (LOCAL)
+ * Calcula o índice baseado na MEIA-NOITE LOCAL do usuário.
+ * Se eu estou no Brasil, vira 00:00 BRT. Se estou no Japão, vira 00:00 JST.
  */
-export function getDayIndex(offset = 0): number {
+export function getLocalDayIndex(offset = 0): number {
   const now = new Date();
 
-  // Ajusta a data baseada no UTC para garantir sincronia global
-  now.setUTCDate(now.getUTCDate() + offset);
+  // Aplica o deslocamento (ontem, amanhã)
+  now.setDate(now.getDate() + offset);
 
-  // Zera as horas usando UTC para comparar apenas as datas puras
+  // Zera horas/minutos para comparar apenas datas puras LOCAIS
+  now.setHours(0, 0, 0, 0);
+
+  // Cria a data Epoch também no horário local (00:00 do dia 9/02)
+  const epochLocal = new Date(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY, 0, 0, 0, 0);
+
+  const oneDay = 1000 * 60 * 60 * 24;
+  const diff = now.getTime() - epochLocal.getTime();
+
+  return Math.floor(diff / oneDay);
+}
+
+/**
+ * 2. LÓGICA DO BLOG (SAFE GLOBAL)
+ * O Blog só atualiza quando for 12:00 PM (Meio-dia) UTC.
+ * Isso garante que o dia anterior acabou até no último fuso horário (Baker Island).
+ */
+export function getSafeBlogGameIndex(): number {
+  const now = new Date();
+
+  // Subtrai 12 horas do UTC atual
+  now.setUTCHours(now.getUTCHours() - 12);
+
   const currentDailyUTC = Date.UTC(
     now.getUTCFullYear(),
     now.getUTCMonth(),
     now.getUTCDate(),
   );
 
-  const epochUTC = Date.UTC(
-    GAME_EPOCH.getUTCFullYear(),
-    GAME_EPOCH.getUTCMonth(),
-    GAME_EPOCH.getUTCDate(),
-  );
+  const epochUTC = Date.UTC(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY);
 
   const oneDay = 1000 * 60 * 60 * 24;
   const diff = currentDailyUTC - epochUTC;
@@ -37,27 +57,28 @@ export function getDayIndex(offset = 0): number {
 }
 
 /**
- * Retorna o trio de jogadores de um dia específico.
+ * 3. BUSCADOR UNIVERSAL
+ * Recebe o NÚMERO DO JOGO (Index) e retorna os jogadores.
+ * Não importa se o index veio do horário local ou do horário do blog.
  */
-export function getDailyPlayersByOffset(offset = 0) {
-  const dayIndex = getDayIndex(offset);
-  // Math.abs previne erros se alguém testar datas anteriores ao lançamento
-  const safeIndex = Math.abs(dayIndex);
+export function getPlayersByIndex(gameIndex: number) {
+  const safeIndex = Math.abs(gameIndex);
 
-  // Seleção baseada em deslocamentos fixos para garantir unicidade no trio
+  // Matemática fixa para selecionar o trio
   const p1 = PLAYERS[safeIndex % PLAYERS.length];
   const p2 = PLAYERS[(safeIndex + 13) % PLAYERS.length];
   const p3 = PLAYERS[(safeIndex + 27) % PLAYERS.length];
 
-  // Gera a data para exibição forçando o fuso UTC
-  const targetDate = new Date();
-  targetDate.setUTCDate(targetDate.getUTCDate() + offset);
+  // Recria a data original desse jogo para exibição
+  // (Epoch + gameIndex dias)
+  const displayDate = new Date(Date.UTC(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY));
+  displayDate.setUTCDate(displayDate.getUTCDate() + gameIndex);
 
-  const formattedDate = targetDate.toLocaleDateString("en-US", {
-    day: "2-digit",
+  const formattedDate = displayDate.toLocaleDateString("en-US", {
+    day: "numeric",
     month: "long",
     year: "numeric",
-    timeZone: "UTC", // Importante: Garante que o texto bata com a lógica do jogo
+    timeZone: "UTC",
   });
 
   return {
@@ -67,62 +88,29 @@ export function getDailyPlayersByOffset(offset = 0) {
   };
 }
 
-export function getGameNumber(): number {
-  return getDayIndex(0) + 1;
-}
-
-export function getFormattedDate(): string {
-  // Retorna a data atual (UTC) formatada para o usuário brasileiro
-  // Pode mostrar a data de "amanhã" se já passar das 21h, o que é correto para o jogo
-  return new Date().toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
-
 /**
- * Auxiliar para gerar Slugs de URL blindado contra 404 e caracteres especiais.
+ * Wrapper para compatibilidade com o Hook do Jogo.
+ * Usa automaticamente o horário LOCAL.
  */
+export function getDailyPlayersByOffset(offset = 0) {
+  const localIndex = getLocalDayIndex(offset);
+  return getPlayersByIndex(localIndex);
+}
+
+// Auxiliares
+export function getGameNumber(): number {
+  return getLocalDayIndex(0) + 1;
+}
+
 export function generateSlug(name: string): string {
   return name
-    .normalize("NFD") // Decompõe caracteres (Ex: é -> e + ´)
-    .replace(/[\u0300-\u036f]/g, "") // Remove os acentos
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-") // Troca espaços por hífens
-    .replace(/[^\w\-]+/g, "") // Remove tudo que não for letra, número ou hífen
-    .replace(/\-\-+/g, "-") // Remove hífens duplicados
-    .replace(/^-+/, "") // Remove hífen do começo
-    .replace(/-+$/, ""); // Remove hífen do fim
-}
-
-/**
- * LÓGICA DE SEGURANÇA DO BLOG (Baker Island Rule)
- * Retorna um índice "atrasado" em 12 horas.
- * O blog só deve revelar o jogo do dia quando ele tiver acabado em todos os fusos horários do mundo.
- */
-export function getSafeBlogGameIndex(): number {
-  const now = new Date();
-
-  // Subtrai 12 horas do horário atual UTC
-  now.setUTCHours(now.getUTCHours() - 12);
-
-  const currentDailyUTC = Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-  );
-
-  const epochUTC = Date.UTC(
-    GAME_EPOCH.getUTCFullYear(),
-    GAME_EPOCH.getUTCMonth(),
-    GAME_EPOCH.getUTCDate(),
-  );
-
-  const oneDay = 1000 * 60 * 60 * 24;
-  const diff = currentDailyUTC - epochUTC;
-
-  return Math.floor(diff / oneDay);
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
 }

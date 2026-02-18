@@ -1,51 +1,25 @@
 import Link from "next/link";
 import {
-  getDailyPlayersByOffset,
+  getSafeBlogGameIndex,
+  getPlayersByIndex,
   generateSlug,
-  getDayIndex,
 } from "@/lib/gameLogic";
 
 export default function BlogList() {
-  // 1. Hora UTC atual
-  const now = new Date();
-  const currentHourUTC = now.getUTCHours();
+  // 1. LÓGICA DE SEGURANÇA (Baker Island Rule)
+  // Pergunta: "Qual é o último jogo que já acabou em 100% dos fusos horários?"
+  const safeIndex = getSafeBlogGameIndex();
 
-  // 2. Verifica se estamos na "Zona de Perigo" (00:00 até 12:00 UTC)
-  // Se for antes do meio-dia em Londres, o dia anterior AINDA NÃO ACABOU em Baker Island.
-  // Então precisamos adicionar um atraso extra de -1 dia.
-  const needsDelay = currentHourUTC < 12;
+  // 2. DESTAQUE (Latest Revealed)
+  // É o jogo correspondente ao índice seguro atual.
+  // Se safeIndex for negativo (ex: dia do lançamento), retorna null.
+  const yesterday = safeIndex >= 0 ? getPlayersByIndex(safeIndex) : null;
 
-  // Se precisa de delay, o "hoje do blog" é ontem (-1). Se não, é hoje (0).
-  const blogBaseOffset = needsDelay ? -1 : 0;
-
-  // 3. Agora calculamos o índice baseado nesse "hoje ajustado"
-  const blogCurrentIndex = getDayIndex(blogBaseOffset);
-
-  // 4. "Destaque de Ontem": É o dia anterior ao base do blog
-  // Se blogBaseOffset for 0 (depois do meio dia), yesterdayOffset = -1.
-  // Se blogBaseOffset for -1 (antes do meio dia), yesterdayOffset = -2.
-  const yesterdayOffset = blogBaseOffset - 1;
-
-  // Só mostramos se o jogo já tiver histórico suficiente
-  const yesterday =
-    blogCurrentIndex >= 1 ? getDailyPlayersByOffset(yesterdayOffset) : null;
-
-  // 5. Arquivo: Do dia anterior ao destaque até o início
+  // 3. ARQUIVO HISTÓRICO
+  // Loop do índice anterior (safeIndex - 1) até o dia zero (0).
   const archiveDays = [];
-
-  // Começamos de yesterdayOffset - 1 e vamos voltando
-  // Exemplo: Se yesterdayOffset é -1, começamos do -2.
-  // Vamos até cobrir todo o histórico desde o GAME_EPOCH
-
-  // Para saber quantos dias voltar, usamos o blogCurrentIndex.
-  // Se estamos no dia 9 (index 8), yesterday é index 7.
-  // O loop deve pegar index 6, 5, 4, 3, 2, 1, 0.
-  // Total de itens = blogCurrentIndex - 1 (o yesterday já foi pego).
-
-  for (let i = 2; i <= blogCurrentIndex; i++) {
-    // Se blogBaseOffset é 0, pegamos -2, -3...
-    // Se blogBaseOffset é -1, pegamos -3, -4...
-    archiveDays.push(getDailyPlayersByOffset(blogBaseOffset - i));
+  for (let i = safeIndex - 1; i >= 0; i--) {
+    archiveDays.push(getPlayersByIndex(i));
   }
 
   return (
@@ -69,7 +43,7 @@ export default function BlogList() {
           </p>
         </header>
 
-        {/* --- SEÇÃO: ONTEM (DESTAQUE) --- */}
+        {/* --- SEÇÃO: ONTEM (DESTAQUE / LATEST REVEALED) --- */}
         {yesterday && (
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-6">
@@ -82,6 +56,7 @@ export default function BlogList() {
               </h2>
             </div>
 
+            {/* Layout de Destaque: 3 Cards Grandes */}
             <div className="grid gap-6 md:grid-cols-3">
               {yesterday.players.map((player) => (
                 <Link
@@ -116,7 +91,7 @@ export default function BlogList() {
           </section>
         )}
 
-        {/* --- SEÇÃO: ARQUIVO COMPLETO --- */}
+        {/* --- SEÇÃO: ARQUIVO COMPLETO (PAST CHALLENGES) --- */}
         {archiveDays.length > 0 && (
           <section className="pb-20">
             <div className="flex items-center gap-3 mb-8">
@@ -142,7 +117,7 @@ export default function BlogList() {
                     </h3>
                   </div>
 
-                  {/* Lista de Jogadores (Cada um é um botão agora) */}
+                  {/* Lista de Jogadores (Botões Individuais) */}
                   <div className="grid md:grid-cols-3 gap-4">
                     {day.players.map((p) => (
                       <Link
