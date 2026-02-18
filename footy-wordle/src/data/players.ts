@@ -1,1681 +1,2997 @@
+
 // ⚠️ ARQUIVO GERADO AUTOMATICAMENTE
-// DATA: 2/9/2026, 1:13:01 AM
-// TOTAL: 304 JOGADORES
+// DATA: 2/18/2026, 1:54:04 AM
+// TOTAL: 129 JOGADORES
+
+export interface PlayerStats {
+  rating: string;
+  goals: number;
+  assists: number;
+  matches: number;
+  passAccuracy: number;
+  dribbles: number;
+  tackles: number;
+  yellowCards: number;
+  redCards?: number;
+}
 
 export interface Player {
   id: number;
   name: string;
-  hints: string[]; // [Position, Nationality, Profile]
   image: string;
+  hints: string[]; // [Position, Nationality, Profile]
+  clubLogo?: string;
+  leagueName?: string;
+  stats?: PlayerStats;
+  funFact?: string;
 }
 
 export const PLAYERS: Player[] = [
   {
-    id: 194,
-    name: "S. de Vrij",
-    image: "https://media.api-sports.io/football/players/194.png",
-    hints: ["Defender", "Netherlands", "34 years • 190"],
-  },
-  {
-    id: 19720,
-    name: "T. Chalobah",
-    image: "https://media.api-sports.io/football/players/19720.png",
-    hints: ["Defender", "England", "26 years • 190"],
-  },
-  {
-    id: 736,
-    name: "Fran García",
-    image: "https://media.api-sports.io/football/players/736.png",
-    hints: ["Defender", "Spain", "26 years • 169"],
-  },
-  {
-    id: 37604,
-    name: "S. Beukema",
-    image: "https://media.api-sports.io/football/players/37604.png",
-    hints: ["Defender", "Netherlands", "27 years • 188"],
-  },
-  {
-    id: 180317,
-    name: "C. Bradley",
-    image: "https://media.api-sports.io/football/players/180317.png",
-    hints: ["Defender", "Northern Ireland", "22 years • 180"],
-  },
-  {
-    id: 6716,
-    name: "A. Mac Allister",
-    image: "https://media.api-sports.io/football/players/6716.png",
-    hints: ["Midfielder", "Argentina", "27 years • 176"],
-  },
-  {
-    id: 19545,
-    name: "R. James",
-    image: "https://media.api-sports.io/football/players/19545.png",
-    hints: ["Defender", "England", "26 years • 182"],
-  },
-  {
-    id: 157052,
-    name: "R. Calafiori",
-    image: "https://media.api-sports.io/football/players/157052.png",
-    hints: ["Defender", "Italy", "23 years • 188"],
-  },
-  {
-    id: 217,
-    name: "Lautaro Martínez",
-    image: "https://media.api-sports.io/football/players/217.png",
-    hints: ["Forward", "Argentina", "28 years • 174"],
-  },
-  {
-    id: 5,
-    name: "M. Akanji",
-    image: "https://media.api-sports.io/football/players/5.png",
-    hints: ["Defender", "Switzerland", "30 years • 188"],
-  },
-  {
-    id: 8500,
-    name: "W. Endo",
-    image: "https://media.api-sports.io/football/players/8500.png",
-    hints: ["Midfielder", "Japan", "33 years • 178"],
-  },
-  {
-    id: 1460,
-    name: "B. Saka",
-    image: "https://media.api-sports.io/football/players/1460.png",
-    hints: ["Forward", "England", "24 years • 178"],
-  },
-  {
-    id: 643,
-    name: "Gabriel Jesus",
-    image: "https://media.api-sports.io/football/players/643.png",
-    hints: ["Forward", "Brazil", "28 years • 175"],
-  },
-  {
-    id: 313245,
-    name: "M. Lewis-Skelly",
-    image: "https://media.api-sports.io/football/players/313245.png",
-    hints: ["Defender", "England", "19 years • 178"],
-  },
-  {
-    id: 37127,
-    name: "M. Ødegaard",
-    image: "https://media.api-sports.io/football/players/37127.png",
-    hints: ["Midfielder", "Norway", "27 years • 178"],
-  },
-  {
-    id: 414385,
-    name: "C. Echeverri",
-    image: "https://media.api-sports.io/football/players/414385.png",
-    hints: ["Midfielder", "Argentina", "20 years • 171"],
-  },
-  {
-    id: 1314,
-    name: "Amir Rrahmani",
-    image: "https://media.api-sports.io/football/players/1314.png",
-    hints: ["Defender", "Kosovo", "31 years • 192"],
-  },
-  {
-    id: 9978,
-    name: "Everson",
-    image: "https://media.api-sports.io/football/players/9978.png",
-    hints: ["Goalkeeper", "Brazil", "35 years • 192"],
-  },
-  {
-    id: 284324,
-    name: "A. Garnacho",
-    image: "https://media.api-sports.io/football/players/284324.png",
-    hints: ["Forward", "Argentina", "21 years • 180"],
-  },
-  {
-    id: 9916,
-    name: "Marcos Rocha",
-    image: "https://media.api-sports.io/football/players/9916.png",
-    hints: ["Defender", "Brazil", "37 years • 176"],
-  },
-  {
-    id: 382452,
-    name: "P. Dorgu",
-    image: "https://media.api-sports.io/football/players/382452.png",
-    hints: ["Defender", "Denmark", "21 years • 185"],
-  },
-  {
-    id: 33692,
-    name: "S. Fukuoka",
-    image: "https://media.api-sports.io/football/players/33692.png",
-    hints: ["Defender", "Japan", "30 years • 180"],
-  },
-  {
-    id: 30543,
-    name: "G. Raspadori",
-    image: "https://media.api-sports.io/football/players/30543.png",
-    hints: ["Forward", "Italy", "25 years • 172"],
-  },
-  {
-    id: 158698,
-    name: "J. Quansah",
-    image: "https://media.api-sports.io/football/players/158698.png",
-    hints: ["Defender", "England", "23 years • 190"],
-  },
-  {
-    id: 206926,
-    name: "Y. Taguchi",
-    image: "https://media.api-sports.io/football/players/206926.png",
-    hints: ["Forward", "Japan", "24 years • 178 cm"],
-  },
-  {
-    id: 64280,
-    name: "R. Handa",
-    image: "https://media.api-sports.io/football/players/64280.png",
-    hints: ["Defender", "Japan", "24 years • 176"],
-  },
-  {
-    id: 30415,
-    name: "D. Vlahović",
-    image: "https://media.api-sports.io/football/players/30415.png",
-    hints: ["Forward", "Serbia", "26 years • 190"],
-  },
-  {
-    id: 343205,
-    name: "Mario Martín",
-    image: "https://media.api-sports.io/football/players/343205.png",
-    hints: ["Midfielder", "Spain", "21 years • 178"],
-  },
-  {
-    id: 306706,
-    name: "A. Giay",
-    image: "https://media.api-sports.io/football/players/306706.png",
-    hints: ["Defender", "Argentina", "22 years • 180"],
-  },
-  {
-    id: 32967,
-    name: "Y. Wakizaka",
-    image: "https://media.api-sports.io/football/players/32967.png",
-    hints: ["Midfielder", "Japan", "30 years • 173"],
-  },
-  {
-    id: 109224,
-    name: "G. Endo",
-    image: "https://media.api-sports.io/football/players/109224.png",
-    hints: ["Defender", "Japan", "31 years • 178 cm"],
-  },
-  {
-    id: 22254,
-    name: "Y. Fofana",
-    image: "https://media.api-sports.io/football/players/22254.png",
-    hints: ["Midfielder", "France", "27 years • 185"],
-  },
-  {
-    id: 237202,
-    name: "S. Nakano",
-    image: "https://media.api-sports.io/football/players/237202.png",
-    hints: ["Defender", "Japan", "22 years • 173"],
-  },
-  {
-    id: 152953,
-    name: "L. Colwill",
-    image: "https://media.api-sports.io/football/players/152953.png",
-    hints: ["Defender", "England", "22 years • 187"],
-  },
-  {
-    id: 19465,
-    name: "David Raya",
-    image: "https://media.api-sports.io/football/players/19465.png",
-    hints: ["Goalkeeper", "Spain", "30 years • 183"],
-  },
-  {
-    id: 22236,
-    name: "Rafael Leão",
-    image: "https://media.api-sports.io/football/players/22236.png",
-    hints: ["Forward", "Portugal", "26 years • 188"],
-  },
-  {
-    id: 33023,
-    name: "K. Yamada",
-    image: "https://media.api-sports.io/football/players/33023.png",
-    hints: ["Forward", "Japan", "26 years • 175"],
-  },
-  {
-    id: 70100,
-    name: "J. Zirkzee",
-    image: "https://media.api-sports.io/football/players/70100.png",
-    hints: ["Forward", "Netherlands", "24 years • 193"],
-  },
-  {
-    id: 38746,
-    name: "J. Timber",
-    image: "https://media.api-sports.io/football/players/38746.png",
-    hints: ["Defender", "Netherlands", "24 years • 179"],
-  },
-  {
-    id: 19959,
-    name: "B. White",
-    image: "https://media.api-sports.io/football/players/19959.png",
-    hints: ["Defender", "England", "28 years • 186"],
-  },
-  {
-    id: 10081,
-    name: "Rafael",
-    image: "https://media.api-sports.io/football/players/10081.png",
-    hints: ["Goalkeeper", "Brazil", "36 years • 192"],
-  },
-  {
-    id: 32971,
-    name: "Y. Kobayashi",
-    image: "https://media.api-sports.io/football/players/32971.png",
-    hints: ["Forward", "Japan", "38 years • 177"],
-  },
-  {
-    id: 18861,
-    name: "N. Aké",
-    image: "https://media.api-sports.io/football/players/18861.png",
-    hints: ["Defender", "Netherlands", "30 years • 180"],
-  },
-  {
-    id: 197533,
-    name: "Praxedes",
-    image: "https://media.api-sports.io/football/players/197533.png",
-    hints: ["Midfielder", "Brazil", "24 years • 185"],
-  },
-  {
-    id: 9891,
-    name: "D. Terans",
-    image: "https://media.api-sports.io/football/players/9891.png",
-    hints: ["Midfielder", "Uruguay", "31 years • 172"],
-  },
-  {
-    id: 11756,
-    name: "A. Rossi",
-    image: "https://media.api-sports.io/football/players/11756.png",
-    hints: ["Goalkeeper", "Argentina", "30 years • 193"],
-  },
-  {
-    id: 2937,
-    name: "D. Rice",
-    image: "https://media.api-sports.io/football/players/2937.png",
-    hints: ["Midfielder", "England", "27 years • 188"],
-  },
-  {
-    id: 133910,
-    name: "Paulo Henrique",
-    image: "https://media.api-sports.io/football/players/133910.png",
-    hints: ["Defender", "Brazil", "29 years • 175"],
-  },
-  {
-    id: 542,
-    name: "R. Gravenberch",
-    image: "https://media.api-sports.io/football/players/542.png",
-    hints: ["Midfielder", "Netherlands", "23 years • 190"],
-  },
-  {
-    id: 1271,
-    name: "A. Tchouaméni",
-    image: "https://media.api-sports.io/football/players/1271.png",
-    hints: ["Midfielder", "France", "26 years • 187"],
-  },
-  {
-    id: 406337,
-    name: "T. Yokoyama",
-    image: "https://media.api-sports.io/football/players/406337.png",
-    hints: ["Forward", "Japan", "25 years • 167 cm"],
-  },
-  {
-    id: 33744,
-    name: "Lee Yong-Jae",
-    image: "https://media.api-sports.io/football/players/33744.png",
-    hints: ["Forward", "Korea Republic", "34 years • 186 cm"],
-  },
-  {
-    id: 31042,
-    name: "G. Di Lorenzo",
-    image: "https://media.api-sports.io/football/players/31042.png",
-    hints: ["Defender", "Italy", "32 years • 183"],
-  },
-  {
-    id: 2502,
-    name: "G. Gómez",
-    image: "https://media.api-sports.io/football/players/2502.png",
-    hints: ["Defender", "Paraguay", "32 years • 185"],
-  },
-  {
-    id: 50532,
-    name: "Lima",
-    image: "https://media.api-sports.io/football/players/50532.png",
-    hints: ["Midfielder", "Brazil", "29 years • 181"],
-  },
-  {
-    id: 136723,
-    name: "N. Madueke",
-    image: "https://media.api-sports.io/football/players/136723.png",
-    hints: ["Forward", "England", "23 years • 182"],
-  },
-  {
-    id: 280,
-    name: "Alisson Becker",
-    image: "https://media.api-sports.io/football/players/280.png",
-    hints: ["Goalkeeper", "Brazil", "33 years • 193"],
-  },
-  {
-    id: 10388,
-    name: "Patrick",
-    image: "https://media.api-sports.io/football/players/10388.png",
-    hints: ["Midfielder", "Brazil", "33 years • 176"],
-  },
-  {
-    id: 293,
-    name: "C. Jones",
-    image: "https://media.api-sports.io/football/players/293.png",
-    hints: ["Midfielder", "England", "25 years • 185"],
-  },
-  {
-    id: 290,
-    name: "V. van Dijk",
-    image: "https://media.api-sports.io/football/players/290.png",
-    hints: ["Defender", "Netherlands", "34 years • 195"],
-  },
-  {
-    id: 161585,
-    name: "Francisco Conceição",
-    image: "https://media.api-sports.io/football/players/161585.png",
-    hints: ["Forward", "Portugal", "23 years • 170"],
-  },
-  {
-    id: 6725,
-    name: "F. Vera",
-    image: "https://media.api-sports.io/football/players/6725.png",
-    hints: ["Midfielder", "Argentina", "25 years • 179"],
-  },
-  {
-    id: 10396,
-    name: "Nonato",
-    image: "https://media.api-sports.io/football/players/10396.png",
-    hints: ["Midfielder", "Brazil", "27 years • 174"],
-  },
-  {
-    id: 363323,
-    name: "Alexsander",
-    image: "https://media.api-sports.io/football/players/363323.png",
-    hints: ["Midfielder", "Brazil", "22 years • 178"],
-  },
-  {
-    id: 289,
-    name: "A. Robertson",
-    image: "https://media.api-sports.io/football/players/289.png",
-    hints: ["Defender", "Scotland", "31 years • 178"],
-  },
-  {
-    id: 152654,
-    name: "J. Frimpong",
-    image: "https://media.api-sports.io/football/players/152654.png",
-    hints: ["Defender", "Netherlands", "25 years • 171"],
-  },
-  {
-    id: 349001,
-    name: "Wesley",
-    image: "https://media.api-sports.io/football/players/349001.png",
-    hints: ["Defender", "Brazil", "22 years • 173"],
-  },
-  {
-    id: 360114,
-    name: "A. Khusanov",
-    image: "https://media.api-sports.io/football/players/360114.png",
-    hints: ["Defender", "Uzbekistan", "21 years • 186"],
-  },
-  {
-    id: 30410,
-    name: "F. Chiesa",
-    image: "https://media.api-sports.io/football/players/30410.png",
-    hints: ["Forward", "Italy", "28 years • 175"],
-  },
-  {
-    id: 9939,
-    name: "Dudu",
-    image: "https://media.api-sports.io/football/players/9939.png",
-    hints: ["Forward", "Brazil", "34 years • 167"],
-  },
-  {
-    id: 311360,
-    name: "T. Palacios",
-    image: "https://media.api-sports.io/football/players/311360.png",
-    hints: ["Defender", "Argentina", "22 years • 196"],
-  },
-  {
-    id: 21104,
-    name: "R. Kolo Muani",
-    image: "https://media.api-sports.io/football/players/21104.png",
-    hints: ["Forward", "France", "27 years • 187"],
-  },
-  {
-    id: 125674,
-    name: "J. Cabal",
-    image: "https://media.api-sports.io/football/players/125674.png",
-    hints: ["Defender", "Colombia", "25 years • 186"],
-  },
-  {
-    id: 889,
-    name: "V. Lindelöf",
-    image: "https://media.api-sports.io/football/players/889.png",
-    hints: ["Defender", "Sweden", "31 years • 187"],
-  },
-  {
-    id: 195111,
-    name: "Gabriel Menino",
-    image: "https://media.api-sports.io/football/players/195111.png",
-    hints: ["Midfielder", "Brazil", "25 years • 177"],
-  },
-  {
-    id: 36899,
-    name: "T. Koopmeiners",
-    image: "https://media.api-sports.io/football/players/36899.png",
-    hints: ["Midfielder", "Netherlands", "27 years • 184"],
-  },
-  {
-    id: 10067,
-    name: "Alex Santana",
-    image: "https://media.api-sports.io/football/players/10067.png",
-    hints: ["Midfielder", "Brazil", "30 years • 182"],
-  },
-  {
-    id: 2467,
-    name: "Lisandro Martínez",
-    image: "https://media.api-sports.io/football/players/2467.png",
-    hints: ["Defender", "Argentina", "28 years • 175"],
-  },
-  {
-    id: 63577,
-    name: "M. Mudryk",
-    image: "https://media.api-sports.io/football/players/63577.png",
-    hints: ["Midfielder", "Ukraine", "25 years • 175"],
-  },
-  {
-    id: 30763,
-    name: "Jandrei",
-    image: "https://media.api-sports.io/football/players/30763.png",
-    hints: ["Goalkeeper", "Brazil", "32 years • 187"],
-  },
-  {
-    id: 1485,
-    name: "Bruno Fernandes",
-    image: "https://media.api-sports.io/football/players/1485.png",
-    hints: ["Midfielder", "Portugal", "31 years • 179"],
-  },
-  {
-    id: 36171,
-    name: "F. Elizari",
-    image: "https://media.api-sports.io/football/players/36171.png",
-    hints: ["Midfielder", "Argentina", "34 years • 173"],
-  },
-  {
-    id: 9954,
-    name: "Rodrigo Nestor",
-    image: "https://media.api-sports.io/football/players/9954.png",
-    hints: ["Midfielder", "Brazil", "25 years • 175"],
-  },
-  {
-    id: 13572,
-    name: "G. Fuentes",
-    image: "https://media.api-sports.io/football/players/13572.png",
-    hints: ["Defender", "Colombia", "29 years • 181"],
-  },
-  {
-    id: 313236,
-    name: "E. Nwaneri",
-    image: "https://media.api-sports.io/football/players/313236.png",
-    hints: ["Midfielder", "England", "18 years • 176"],
-  },
-  {
-    id: 2273,
-    name: "Kepa",
-    image: "https://media.api-sports.io/football/players/2273.png",
-    hints: ["Goalkeeper", "Spain", "31 years • 189"],
-  },
-  {
-    id: 96,
-    name: "Jemerson",
-    image: "https://media.api-sports.io/football/players/96.png",
-    hints: ["Defender", "Brazil", "33 years • 184"],
-  },
-  {
-    id: 336988,
-    name: "Lorenzo Aguado",
-    image: "https://media.api-sports.io/football/players/336988.png",
-    hints: ["Defender", "Spain", "23 years • 177 cm"],
-  },
-  {
-    id: 9458,
-    name: "Léo Ortiz",
-    image: "https://media.api-sports.io/football/players/9458.png",
-    hints: ["Defender", "Brazil", "30 years • 185"],
-  },
-  {
-    id: 30533,
-    name: "M. Locatelli",
-    image: "https://media.api-sports.io/football/players/30533.png",
-    hints: ["Midfielder", "Italy", "28 years • 185"],
-  },
-  {
-    id: 203474,
-    name: "N. Zalewski",
-    image: "https://media.api-sports.io/football/players/203474.png",
-    hints: ["Midfielder", "Poland", "24 years • 175"],
-  },
-  {
-    id: 47311,
-    name: "Mikel Merino",
-    image: "https://media.api-sports.io/football/players/47311.png",
-    hints: ["Midfielder", "Spain", "29 years • 189"],
-  },
-  {
-    id: 10432,
-    name: "Júnior Santos",
-    image: "https://media.api-sports.io/football/players/10432.png",
-    hints: ["Forward", "Brazil", "31 years • 188"],
-  },
-  {
-    id: 341640,
-    name: "Raúl Asencio",
-    image: "https://media.api-sports.io/football/players/341640.png",
-    hints: ["Defender", "Spain", "22 years • 184"],
-  },
-  {
-    id: 51587,
-    name: "F. Labandeira",
-    image: "https://media.api-sports.io/football/players/51587.png",
-    hints: ["Forward", "Uruguay", "29 years • 173"],
-  },
-  {
-    id: 51466,
-    name: "J. Piquerez",
-    image: "https://media.api-sports.io/football/players/51466.png",
-    hints: ["Defender", "Uruguay", "27 years • 184"],
-  },
-  {
-    id: 41621,
-    name: "Matheus Nunes",
-    image: "https://media.api-sports.io/football/players/41621.png",
-    hints: ["Midfielder", "Portugal", "27 years • 183"],
-  },
-  {
-    id: 157615,
-    name: "Dalberson",
-    image: "https://media.api-sports.io/football/players/157615.png",
-    hints: ["Goalkeeper", "Brazil", "29 years • 191"],
-  },
-  {
-    id: 636,
-    name: "Bernardo Silva",
-    image: "https://media.api-sports.io/football/players/636.png",
-    hints: ["Midfielder", "Portugal", "31 years • 173"],
-  },
-  {
-    id: 552,
-    name: "David Neres",
-    image: "https://media.api-sports.io/football/players/552.png",
-    hints: ["Forward", "Brazil", "28 years • 176"],
-  },
-  {
-    id: 166701,
-    name: "Welton Felipe",
-    image: "https://media.api-sports.io/football/players/166701.png",
-    hints: ["Forward", "Brazil", "28 years • 175"],
-  },
-  {
-    id: 51426,
-    name: "J. Rodríguez",
-    image: "https://media.api-sports.io/football/players/51426.png",
-    hints: ["Defender", "Uruguay", "28 years • 183"],
-  },
-  {
-    id: 367878,
-    name: "L. Topalović",
-    image: "https://media.api-sports.io/football/players/367878.png",
-    hints: ["Midfielder", "Slovenia", "19 years • 186 cm"],
-  },
-  {
-    id: 41274,
-    name: "Aloísio Souza",
-    image: "https://media.api-sports.io/football/players/41274.png",
-    hints: ["Midfielder", "Brazil", "29 years • 180"],
-  },
-  {
-    id: 774,
-    name: "Juan Jesus",
-    image: "https://media.api-sports.io/football/players/774.png",
-    hints: ["Defender", "Brazil", "34 years • 185"],
-  },
-  {
-    id: 338751,
-    name: "Víctor Muñoz",
-    image: "https://media.api-sports.io/football/players/338751.png",
-    hints: ["Forward", "Spain", "22 years • 173"],
-  },
-  {
-    id: 47380,
-    name: "Marc Cucurella",
-    image: "https://media.api-sports.io/football/players/47380.png",
-    hints: ["Defender", "Spain", "27 years • 174"],
-  },
-  {
-    id: 653,
-    name: "F. Mendy",
-    image: "https://media.api-sports.io/football/players/653.png",
-    hints: ["Defender", "France", "30 years • 180"],
-  },
-  {
-    id: 30414,
-    name: "G. Simeone",
-    image: "https://media.api-sports.io/football/players/30414.png",
-    hints: ["Forward", "Argentina", "30 years • 180"],
-  },
-  {
-    id: 304117,
-    name: "S. Tanabe",
-    image: "https://media.api-sports.io/football/players/304117.png",
-    hints: ["Defender", "Japan", "23 years • 180"],
-  },
-  {
-    id: 33272,
-    name: "D. Araki",
-    image: "https://media.api-sports.io/football/players/33272.png",
-    hints: ["Midfielder", "Japan", "31 years • 178 cm"],
-  },
-  {
-    id: 317337,
-    name: "M. Ogawa",
-    image: "https://media.api-sports.io/football/players/317337.png",
-    hints: ["Defender", "Japan", "26 years"],
-  },
-  {
-    id: 146585,
-    name: "D. Tono",
-    image: "https://media.api-sports.io/football/players/146585.png",
-    hints: ["Forward", "Japan", "26 years • 166"],
-  },
-  {
-    id: 335101,
-    name: "J. Rouhi",
-    image: "https://media.api-sports.io/football/players/335101.png",
-    hints: ["Defender", "Sweden", "22 years • 183"],
-  },
-  {
-    id: 10379,
-    name: "Bruno Fuchs",
-    image: "https://media.api-sports.io/football/players/10379.png",
-    hints: ["Defender", "Brazil", "26 years • 190"],
-  },
-  {
-    id: 415,
-    name: "W. McKennie",
-    image: "https://media.api-sports.io/football/players/415.png",
-    hints: ["Midfielder", "USA", "27 years • 183"],
-  },
-  {
-    id: 353591,
-    name: "R. Nishitani",
-    image: "https://media.api-sports.io/football/players/353591.png",
-    hints: ["Midfielder", "Japan", "22 years"],
-  },
-  {
-    id: 307972,
-    name: "A. Matsumoto",
-    image: "https://media.api-sports.io/football/players/307972.png",
-    hints: ["Midfielder", "Japan", "27 years • 179 cm"],
-  },
-  {
-    id: 299148,
-    name: "Felipe Amaral",
-    image: "https://media.api-sports.io/football/players/299148.png",
-    hints: ["Midfielder", "Brazil", "22 years"],
-  },
-  {
-    id: 567,
-    name: "Rúben Dias",
-    image: "https://media.api-sports.io/football/players/567.png",
-    hints: ["Defender", "Portugal", "28 years • 187"],
-  },
-  {
-    id: 94562,
-    name: "S. Giménez",
-    image: "https://media.api-sports.io/football/players/94562.png",
-    hints: ["Forward", "Mexico", "24 years • 182"],
-  },
-  {
-    id: 474269,
-    name: "Thauan Willians",
-    image: "https://media.api-sports.io/football/players/474269.png",
-    hints: ["Defender", "Brazil", "21 years • 182"],
-  },
-  {
-    id: 9958,
-    name: "Tchê Tchê",
-    image: "https://media.api-sports.io/football/players/9958.png",
-    hints: ["Midfielder", "Brazil", "33 years • 176"],
-  },
-  {
-    id: 109262,
-    name: "R. Kawakami",
-    image: "https://media.api-sports.io/football/players/109262.png",
-    hints: ["Midfielder", "Japan", "31 years • 177 cm"],
-  },
-  {
-    id: 32950,
-    name: "S. Kurumaya",
-    image: "https://media.api-sports.io/football/players/32950.png",
-    hints: ["Defender", "Japan", "33 years • 180"],
-  },
-  {
-    id: 19145,
-    name: "T. Adarabioyo",
-    image: "https://media.api-sports.io/football/players/19145.png",
-    hints: ["Defender", "England", "28 years • 196"],
-  },
-  {
-    id: 10372,
-    name: "Marcelo Lomba",
-    image: "https://media.api-sports.io/football/players/10372.png",
-    hints: ["Goalkeeper", "Brazil", "39 years • 189"],
-  },
-  {
-    id: 279800,
-    name: "Vanderlan",
-    image: "https://media.api-sports.io/football/players/279800.png",
-    hints: ["Defender", "Brazil", "23 years • 183"],
-  },
-  {
-    id: 9936,
-    name: "Willian",
-    image: "https://media.api-sports.io/football/players/9936.png",
-    hints: ["Forward", "Brazil", "39 years • 171"],
-  },
-  {
-    id: 30558,
-    name: "N. Barella",
-    image: "https://media.api-sports.io/football/players/30558.png",
-    hints: ["Midfielder", "Italy", "29 years • 175"],
-  },
-  {
-    id: 371510,
-    name: "S. Yamada",
-    image: "https://media.api-sports.io/football/players/371510.png",
-    hints: ["Forward", "Japan", "25 years • 175"],
-  },
-  {
-    id: 370130,
-    name: "H. Yamauchi",
-    image: "https://media.api-sports.io/football/players/370130.png",
-    hints: ["Midfielder", "Japan", "24 years • 170"],
-  },
-  {
-    id: 5996,
-    name: "E. Fernández",
-    image: "https://media.api-sports.io/football/players/5996.png",
-    hints: ["Midfielder", "Argentina", "25 years • 178"],
-  },
-  {
-    id: 9340,
-    name: "Sabino",
-    image: "https://media.api-sports.io/football/players/9340.png",
-    hints: ["Defender", "Brazil", "29 years • 184"],
-  },
-  {
-    id: 47400,
-    name: "A. Lunin",
-    image: "https://media.api-sports.io/football/players/47400.png",
-    hints: ["Goalkeeper", "Ukraine", "26 years • 191"],
-  },
-  {
-    id: 2935,
-    name: "H. Maguire",
-    image: "https://media.api-sports.io/football/players/2935.png",
-    hints: ["Defender", "England", "32 years • 194"],
-  },
-  {
-    id: 10229,
-    name: "Cássio",
-    image: "https://media.api-sports.io/football/players/10229.png",
-    hints: ["Goalkeeper", "Brazil", "38 years • 195"],
-  },
-  {
-    id: 41169,
-    name: "Léo Jardim",
-    image: "https://media.api-sports.io/football/players/41169.png",
-    hints: ["Goalkeeper", "Brazil", "30 years • 188"],
-  },
-  {
-    id: 307123,
-    name: "N. O&apos;Reilly",
-    image: "https://media.api-sports.io/football/players/307123.png",
-    hints: ["Midfielder", "England", "20 years • 177"],
-  },
-  {
-    id: 50081,
-    name: "David Braz",
-    image: "https://media.api-sports.io/football/players/50081.png",
-    hints: ["Defender", "Brazil", "38 years • 188"],
-  },
-  {
-    id: 10080,
-    name: "Fábio",
-    image: "https://media.api-sports.io/football/players/10080.png",
-    hints: ["Goalkeeper", "Brazil", "45 years • 189"],
-  },
-  {
-    id: 19035,
-    name: "H. Elliott",
-    image: "https://media.api-sports.io/football/players/19035.png",
-    hints: ["Midfielder", "England", "22 years • 170"],
-  },
-  {
-    id: 30670,
-    name: "M. Di Gregorio",
-    image: "https://media.api-sports.io/football/players/30670.png",
-    hints: ["Goalkeeper", "Italy", "28 years • 187"],
-  },
-  {
-    id: 225229,
-    name: "K. Fujioka",
-    image: "https://media.api-sports.io/football/players/225229.png",
-    hints: ["Forward", "Japan", "31 years • 174 cm"],
-  },
-  {
-    id: 862,
-    name: "L. Spinazzola",
-    image: "https://media.api-sports.io/football/players/862.png",
-    hints: ["Defender", "Italy", "32 years • 186"],
-  },
-  {
-    id: 157997,
-    name: "A. Diallo",
-    image: "https://media.api-sports.io/football/players/157997.png",
-    hints: ["Forward", "Côte d'Ivoire", "23 years • 173"],
-  },
-  {
-    id: 756,
-    name: "F. Valverde",
-    image: "https://media.api-sports.io/football/players/756.png",
-    hints: ["Midfielder", "Uruguay", "27 years • 182"],
-  },
-  {
-    id: 281,
-    name: "C. Kelleher",
-    image: "https://media.api-sports.io/football/players/281.png",
-    hints: ["Goalkeeper", "Republic of Ireland", "27 years • 188"],
-  },
-  {
-    id: 1771,
-    name: "Ayrton Lucas",
-    image: "https://media.api-sports.io/football/players/1771.png",
-    hints: ["Defender", "Brazil", "28 years • 180"],
-  },
-  {
-    id: 641,
-    name: "O. Zinchenko",
-    image: "https://media.api-sports.io/football/players/641.png",
-    hints: ["Defender", "Ukraine", "29 years • 175"],
-  },
-  {
-    id: 33320,
-    name: "R. Meshino",
-    image: "https://media.api-sports.io/football/players/33320.png",
-    hints: ["Forward", "Japan", "27 years • 171"],
-  },
-  {
-    id: 9874,
-    name: "Guga",
-    image: "https://media.api-sports.io/football/players/9874.png",
-    hints: ["Defender", "Brazil", "27 years • 173"],
-  },
-  {
-    id: 2207,
-    name: "E. Camavinga",
-    image: "https://media.api-sports.io/football/players/2207.png",
-    hints: ["Midfielder", "France", "23 years • 182"],
-  },
-  {
-    id: 2410,
-    name: "Weverton",
-    image: "https://media.api-sports.io/football/players/2410.png",
-    hints: ["Goalkeeper", "Brazil", "38 years • 189"],
-  },
-  {
-    id: 22224,
-    name: "Gabriel Magalhães",
-    image: "https://media.api-sports.io/football/players/22224.png",
-    hints: ["Defender", "Brazil", "28 years • 190"],
-  },
-  {
-    id: 336711,
-    name: "Gonzalo García",
-    image: "https://media.api-sports.io/football/players/336711.png",
-    hints: ["Forward", "Spain", "21 years • 182"],
-  },
-  {
-    id: 51494,
-    name: "M. Ugarte",
-    image: "https://media.api-sports.io/football/players/51494.png",
-    hints: ["Midfielder", "Uruguay", "24 years • 182"],
-  },
-  {
-    id: 5981,
-    name: "C. Pavón",
-    image: "https://media.api-sports.io/football/players/5981.png",
-    hints: ["Forward", "Argentina", "30 years • 167"],
-  },
-  {
-    id: 33106,
-    name: "T. Aoki",
-    image: "https://media.api-sports.io/football/players/33106.png",
-    hints: ["Midfielder", "Japan", "36 years • 179 cm"],
-  },
-  {
-    id: 891,
-    name: "L. Shaw",
-    image: "https://media.api-sports.io/football/players/891.png",
-    hints: ["Defender", "England", "30 years • 178"],
-  },
-  {
-    id: 10083,
-    name: "Murilo",
-    image: "https://media.api-sports.io/football/players/10083.png",
-    hints: ["Defender", "Brazil", "28 years • 188"],
-  },
-  {
-    id: 44497,
-    name: "I. Jebali",
-    image: "https://media.api-sports.io/football/players/44497.png",
-    hints: ["Forward", "Tunisia", "34 years • 182"],
-  },
-  {
-    id: 111266,
-    name: "N. Lavi",
-    image: "https://media.api-sports.io/football/players/111266.png",
-    hints: ["Midfielder", "Israel", "29 years • 177"],
-  },
-  {
-    id: 278,
-    name: "Kylian Mbappé",
-    image: "https://media.api-sports.io/football/players/278.png",
-    hints: ["Forward", "France", "27 years • 178"],
-  },
-  {
-    id: 278133,
-    name: "Oscar Bobb",
-    image: "https://media.api-sports.io/football/players/278133.png",
-    hints: ["Midfielder", "Norway", "22 years • 177"],
-  },
-  {
-    id: 10237,
-    name: "Manoel",
-    image: "https://media.api-sports.io/football/players/10237.png",
-    hints: ["Defender", "Brazil", "35 years • 180"],
-  },
-  {
-    id: 388547,
-    name: "Luca Marianucci",
-    image: "https://media.api-sports.io/football/players/388547.png",
-    hints: ["Defender", "Italy", "21 years • 186"],
-  },
-  {
-    id: 336671,
-    name: "Renato Veiga",
-    image: "https://media.api-sports.io/football/players/336671.png",
-    hints: ["Midfielder", "Portugal", "22 years • 190"],
-  },
-  {
-    id: 31226,
-    name: "A. Buongiorno",
-    image: "https://media.api-sports.io/football/players/31226.png",
-    hints: ["Defender", "Italy", "26 years • 190"],
-  },
-  {
-    id: 1836,
-    name: "F. Acerbi",
-    image: "https://media.api-sports.io/football/players/1836.png",
-    hints: ["Defender", "Italy", "37 years • 192"],
-  },
-  {
-    id: 33714,
-    name: "T. Kishimoto",
-    image: "https://media.api-sports.io/football/players/33714.png",
-    hints: ["Defender", "Japan", "28 years • 174"],
-  },
-  {
-    id: 280245,
-    name: "Martinelli",
-    image: "https://media.api-sports.io/football/players/280245.png",
-    hints: ["Midfielder", "Brazil", "24 years • 177"],
-  },
-  {
-    id: 2592,
-    name: "G. Miura",
-    image: "https://media.api-sports.io/football/players/2592.png",
-    hints: ["Defender", "Japan", "30 years • 183"],
-  },
-  {
-    id: 362886,
-    name: "Zé Welinton",
-    image: "https://media.api-sports.io/football/players/362886.png",
-    hints: ["Defender", "Brazil", "22 years • 170"],
-  },
-  {
-    id: 415076,
-    name: "Rafael Monteiro",
-    image: "https://media.api-sports.io/football/players/415076.png",
-    hints: ["Defender", "Brazil", "21 years"],
-  },
-  {
-    id: 483,
-    name: "K. Kvaratskhelia",
-    image: "https://media.api-sports.io/football/players/483.png",
-    hints: ["Forward", "Georgia", "24 years • 183"],
-  },
-  {
-    id: 22094,
-    name: "W. Fofana",
-    image: "https://media.api-sports.io/football/players/22094.png",
-    hints: ["Defender", "France", "25 years • 190"],
-  },
-  {
-    id: 61431,
-    name: "J. Kiwior",
-    image: "https://media.api-sports.io/football/players/61431.png",
-    hints: ["Defender", "Poland", "25 years • 189"],
-  },
-  {
-    id: 219,
-    name: "M. Politano",
-    image: "https://media.api-sports.io/football/players/219.png",
-    hints: ["Forward", "Italy", "32 years • 171"],
-  },
-  {
-    id: 10085,
-    name: "Cacá",
-    image: "https://media.api-sports.io/football/players/10085.png",
-    hints: ["Defender", "Brazil", "26 years • 187"],
-  },
-  {
-    id: 162188,
-    name: "P. Kalulu",
-    image: "https://media.api-sports.io/football/players/162188.png",
-    hints: ["Defender", "France", "25 years • 179"],
-  },
-  {
-    id: 10163,
-    name: "Renê",
-    image: "https://media.api-sports.io/football/players/10163.png",
-    hints: ["Defender", "Brazil", "33 years • 174"],
-  },
-  {
-    id: 48392,
-    name: "E. Zhegrova",
-    image: "https://media.api-sports.io/football/players/48392.png",
-    hints: ["Forward", "Kosovo", "26 years • 181"],
-  },
-  {
-    id: 47254,
-    name: "M. Olivera",
-    image: "https://media.api-sports.io/football/players/47254.png",
-    hints: ["Defender", "Uruguay", "28 years • 185"],
-  },
-  {
-    id: 263481,
-    name: "L. Colombo",
-    image: "https://media.api-sports.io/football/players/263481.png",
-    hints: ["Forward", "Italy", "23 years • 186"],
-  },
-  {
-    id: 284230,
-    name: "R. Lewis",
-    image: "https://media.api-sports.io/football/players/284230.png",
-    hints: ["Defender", "England", "21 years • 170"],
-  },
-  {
-    id: 366735,
-    name: "Joshua Kofi Acheampong",
-    image: "https://media.api-sports.io/football/players/366735.png",
-    hints: ["Defender", "England", "19 years • 184"],
-  },
-  {
-    id: 860,
-    name: "Alex Sandro",
-    image: "https://media.api-sports.io/football/players/860.png",
-    hints: ["Defender", "Brazil", "35 years • 180"],
-  },
-  {
-    id: 37040,
-    name: "S. van Wermeskerken",
-    image: "https://media.api-sports.io/football/players/37040.png",
-    hints: ["Defender", "Japan", "31 years • 178"],
-  },
-  {
-    id: 403064,
-    name: "H. Amass",
-    image: "https://media.api-sports.io/football/players/403064.png",
-    hints: ["Defender", "England", "18 years • 181"],
-  },
-  {
-    id: 162141,
-    name: "K. De Winter",
-    image: "https://media.api-sports.io/football/players/162141.png",
-    hints: ["Defender", "Belgium", "23 years • 188"],
-  },
-  {
-    id: 10234,
-    name: "Lucas Piton",
-    image: "https://media.api-sports.io/football/players/10234.png",
-    hints: ["Defender", "Brazil", "25 years • 175"],
-  },
-  {
-    id: 340067,
-    name: "Cleiton",
-    image: "https://media.api-sports.io/football/players/340067.png",
-    hints: ["Defender", "Brazil", "22 years"],
-  },
-  {
-    id: 91944,
-    name: "T. Mizuno",
-    image: "https://media.api-sports.io/football/players/91944.png",
-    hints: ["Midfielder", "Japan", "32 years • 170 cm"],
-  },
-  {
-    id: 22090,
-    name: "W. Saliba",
-    image: "https://media.api-sports.io/football/players/22090.png",
-    hints: ["Defender", "France", "24 years • 192"],
-  },
-  {
-    id: 1260,
-    name: "Pablo",
-    image: "https://media.api-sports.io/football/players/1260.png",
-    hints: ["Defender", "Brazil", "34 years • 188"],
-  },
-  {
-    id: 1096,
-    name: "D. Szoboszlai",
-    image: "https://media.api-sports.io/football/players/1096.png",
-    hints: ["Midfielder", "Hungary", "25 years • 186"],
-  },
-  {
-    id: 33268,
-    name: "T. Ominami",
-    image: "https://media.api-sports.io/football/players/33268.png",
-    hints: ["Defender", "Japan", "28 years • 184"],
-  },
-  {
-    id: 356370,
-    name: "S. Miura",
-    image: "https://media.api-sports.io/football/players/356370.png",
-    hints: ["Defender", "Japan", "25 years • 178"],
-  },
-  {
-    id: 33977,
-    name: "S. Aihara",
-    image: "https://media.api-sports.io/football/players/33977.png",
-    hints: ["Forward", "Japan", "29 years • 178 cm"],
-  },
-  {
-    id: 32962,
-    name: "R. Oshima",
-    image: "https://media.api-sports.io/football/players/32962.png",
-    hints: ["Midfielder", "Japan", "33 years • 168"],
-  },
-  {
-    id: 109559,
-    name: "Serginho",
-    image: "https://media.api-sports.io/football/players/109559.png",
-    hints: ["Forward", "Brazil", "30 years • 180"],
-  },
-  {
-    id: 987,
-    name: "Paulinho",
-    image: "https://media.api-sports.io/football/players/987.png",
-    hints: ["Forward", "Brazil", "25 years • 177"],
-  },
-  {
-    id: 32959,
-    name: "A. Ienaga",
-    image: "https://media.api-sports.io/football/players/32959.png",
-    hints: ["Midfielder", "Japan", "39 years • 173"],
-  },
-  {
-    id: 306581,
-    name: "Felipe Andrade",
-    image: "https://media.api-sports.io/football/players/306581.png",
-    hints: ["Defender", "Brazil", "23 years • 182"],
-  },
-  {
-    id: 31056,
-    name: "S. Ricci",
-    image: "https://media.api-sports.io/football/players/31056.png",
-    hints: ["Midfielder", "Italy", "24 years • 181"],
-  },
-  {
-    id: 206254,
-    name: "M. Kerkez",
-    image: "https://media.api-sports.io/football/players/206254.png",
-    hints: ["Defender", "Hungary", "22 years • 180"],
-  },
-  {
-    id: 10017,
-    name: "Ignacio",
-    image: "https://media.api-sports.io/football/players/10017.png",
-    hints: ["Defender", "Brazil", "29 years • 184"],
-  },
-  {
-    id: 129033,
-    name: "J. Gvardiol",
-    image: "https://media.api-sports.io/football/players/129033.png",
-    hints: ["Defender", "Croatia", "24 years • 185"],
-  },
-  {
-    id: 237066,
-    name: "Rafa Marín",
-    image: "https://media.api-sports.io/football/players/237066.png",
-    hints: ["Defender", "Spain", "23 years • 191"],
-  },
-  {
-    id: 199795,
-    name: "R. Yamashita",
-    image: "https://media.api-sports.io/football/players/199795.png",
-    hints: ["Forward", "Japan", "28 years • 164"],
-  },
-  {
-    id: 95,
-    name: "B. Badiashile",
-    image: "https://media.api-sports.io/football/players/95.png",
-    hints: ["Defender", "France", "24 years • 194"],
-  },
-  {
-    id: 203224,
-    name: "F. Wirtz",
-    image: "https://media.api-sports.io/football/players/203224.png",
-    hints: ["Midfielder", "Germany", "22 years • 176"],
-  },
-  {
-    id: 306,
-    name: "Mohamed Salah",
-    image: "https://media.api-sports.io/football/players/306.png",
-    hints: ["Forward", "Egypt", "33 years • 175"],
-  },
-  {
-    id: 32886,
-    name: "S. Nakatani",
-    image: "https://media.api-sports.io/football/players/32886.png",
-    hints: ["Defender", "Japan", "29 years • 182"],
-  },
-  {
-    id: 545,
-    name: "N. Mazraoui",
-    image: "https://media.api-sports.io/football/players/545.png",
-    hints: ["Defender", "Morocco", "28 years • 183"],
-  },
-  {
-    id: 849,
-    name: "M. Perin",
-    image: "https://media.api-sports.io/football/players/849.png",
-    hints: ["Goalkeeper", "Italy", "33 years • 188"],
-  },
-  {
-    id: 195109,
-    name: "Patrick de Paula",
-    image: "https://media.api-sports.io/football/players/195109.png",
-    hints: ["Midfielder", "Brazil", "26 years • 178"],
-  },
-  {
-    id: 33297,
-    name: "K. Kurokawa",
-    image: "https://media.api-sports.io/football/players/33297.png",
-    hints: ["Defender", "Japan", "28 years • 173"],
-  },
-  {
-    id: 1262,
-    name: "Otávio",
-    image: "https://media.api-sports.io/football/players/1262.png",
-    hints: ["Midfielder", "Brazil", "31 years • 176"],
-  },
-  {
-    id: 25004,
-    name: "S. Ortega",
-    image: "https://media.api-sports.io/football/players/25004.png",
-    hints: ["Goalkeeper", "Germany", "33 years • 185"],
-  },
-  {
-    id: 978,
-    name: "K. Havertz",
-    image: "https://media.api-sports.io/football/players/978.png",
-    hints: ["Forward", "Germany", "26 years • 193"],
-  },
-  {
-    id: 339883,
-    name: "K. Yıldız",
-    image: "https://media.api-sports.io/football/players/339883.png",
-    hints: ["Forward", "Türkiye", "20 years • 185"],
-  },
-  {
-    id: 10267,
-    name: "Samuel Xavier",
-    image: "https://media.api-sports.io/football/players/10267.png",
-    hints: ["Defender", "Brazil", "35 years • 167"],
-  },
-  {
-    id: 286616,
-    name: "F. Jörgensen",
-    image: "https://media.api-sports.io/football/players/286616.png",
-    hints: ["Goalkeeper", "Denmark", "23 years • 192"],
-  },
-  {
-    id: 374359,
-    name: "D. Bartesaghi",
-    image: "https://media.api-sports.io/football/players/374359.png",
-    hints: ["Defender", "Italy", "20 years • 193"],
-  },
-  {
-    id: 10124,
-    name: "Léo Pereira",
-    image: "https://media.api-sports.io/football/players/10124.png",
-    hints: ["Defender", "Brazil", "30 years • 188"],
-  },
-  {
-    id: 9907,
-    name: "Victor Luís",
-    image: "https://media.api-sports.io/football/players/9907.png",
-    hints: ["Defender", "Brazil", "32 years • 180"],
-  },
-  {
-    id: 33312,
-    name: "S. Kurata",
-    image: "https://media.api-sports.io/football/players/33312.png",
-    hints: ["Midfielder", "Japan", "37 years • 172"],
-  },
-  {
-    id: 19220,
-    name: "M. Mount",
-    image: "https://media.api-sports.io/football/players/19220.png",
-    hints: ["Midfielder", "England", "27 years • 181"],
-  },
-  {
-    id: 747,
-    name: "Casemiro",
-    image: "https://media.api-sports.io/football/players/747.png",
-    hints: ["Midfielder", "Brazil", "33 years • 185"],
-  },
-  {
-    id: 311275,
-    name: "Gabriel Delfim",
-    image: "https://media.api-sports.io/football/players/311275.png",
-    hints: ["Goalkeeper", "Brazil", "23 years • 189"],
-  },
-  {
-    id: 278950,
-    name: "I. Sakamoto",
-    image: "https://media.api-sports.io/football/players/278950.png",
-    hints: ["Forward", "Japan", "22 years • 173"],
-  },
-  {
-    id: 1946,
-    name: "L. Trossard",
-    image: "https://media.api-sports.io/football/players/1946.png",
-    hints: ["Forward", "Belgium", "31 years • 172"],
-  },
-  {
-    id: 302953,
-    name: "Y. Oiji",
-    image: "https://media.api-sports.io/football/players/302953.png",
-    hints: ["Midfielder", "Japan", "27 years • 177 cm"],
-  },
-  {
-    id: 51701,
-    name: "M. Araújo",
-    image: "https://media.api-sports.io/football/players/51701.png",
-    hints: ["Midfielder", "Uruguay", "29 years • 178"],
-  },
-  {
-    id: 329,
-    name: "P. Zieliński",
-    image: "https://media.api-sports.io/football/players/329.png",
-    hints: ["Midfielder", "Poland", "31 years • 180"],
-  },
-  {
-    id: 33610,
-    name: "Y. Segawa",
-    image: "https://media.api-sports.io/football/players/33610.png",
-    hints: ["Midfielder", "Japan", "32 years • 170"],
-  },
-  {
-    id: 532,
-    name: "M. de Ligt",
-    image: "https://media.api-sports.io/football/players/532.png",
-    hints: ["Defender", "Netherlands", "26 years • 187"],
-  },
-  {
-    id: 30524,
-    name: "M. Lemos",
-    image: "https://media.api-sports.io/football/players/30524.png",
-    hints: ["Defender", "Uruguay", "30 years • 187"],
-  },
-  {
-    id: 215,
-    name: "S. Esposito",
-    image: "https://media.api-sports.io/football/players/215.png",
-    hints: ["Forward", "Italy", "23 years • 186"],
-  },
-  {
-    id: 109211,
-    name: "T. Arakaki",
-    image: "https://media.api-sports.io/football/players/109211.png",
-    hints: ["Midfielder", "Japan", "29 years • 171 cm"],
-  },
-  {
-    id: 92003,
-    name: "K. Nakayama",
-    image: "https://media.api-sports.io/football/players/92003.png",
-    hints: ["Goalkeeper", "Japan", "33 years • 186 cm"],
-  },
-  {
-    id: 21138,
-    name: "R. Aït-Nouri",
-    image: "https://media.api-sports.io/football/players/21138.png",
-    hints: ["Defender", "Algeria", "24 years • 180"],
-  },
-  {
-    id: 315353,
-    name: "Y. Hayasaka",
-    image: "https://media.api-sports.io/football/players/315353.png",
-    hints: ["Goalkeeper", "Japan", "26 years • 184 cm"],
-  },
-  {
-    id: 306210,
-    name: "Matheus Cunha",
-    image: "https://media.api-sports.io/football/players/306210.png",
-    hints: ["Goalkeeper", "Brazil", "24 years • 181"],
-  },
-  {
-    id: 886,
-    name: "Diogo Dalot",
-    image: "https://media.api-sports.io/football/players/886.png",
-    hints: ["Defender", "Portugal", "26 years • 183"],
-  },
-  {
-    id: 26315,
-    name: "N. González",
-    image: "https://media.api-sports.io/football/players/26315.png",
-    hints: ["Forward", "Argentina", "27 years • 180"],
-  },
-  {
-    id: 161933,
-    name: "Nico González",
-    image: "https://media.api-sports.io/football/players/161933.png",
-    hints: ["Midfielder", "Spain", "24 years • 189"],
-  },
-  {
-    id: 8489,
-    name: "J. David",
-    image: "https://media.api-sports.io/football/players/8489.png",
-    hints: ["Forward", "Canada", "26 years • 178"],
-  },
-  {
-    id: 284322,
-    name: "K. Mainoo",
-    image: "https://media.api-sports.io/football/players/284322.png",
-    hints: ["Midfielder", "England", "20 years • 175"],
-  },
-  {
-    id: 10225,
-    name: "João Victor",
-    image: "https://media.api-sports.io/football/players/10225.png",
-    hints: ["Defender", "Brazil", "27 years • 187"],
-  },
-  {
-    id: 436260,
-    name: "F. Camarda",
-    image: "https://media.api-sports.io/football/players/436260.png",
-    hints: ["Forward", "Italy", "17 years • 184"],
-  },
-  {
-    id: 9905,
-    name: "Diogo Barbosa",
-    image: "https://media.api-sports.io/football/players/9905.png",
-    hints: ["Defender", "Brazil", "33 years • 179"],
-  },
-  {
-    id: 63964,
-    name: "F. Torres",
-    image: "https://media.api-sports.io/football/players/63964.png",
-    hints: ["Defender", "Ecuador", "29 years • 187"],
-  },
-  {
-    id: 626,
-    name: "J. Stones",
-    image: "https://media.api-sports.io/football/players/626.png",
-    hints: ["Defender", "England", "31 years • 188"],
-  },
-  {
-    id: 342970,
-    name: "L. Yoro",
-    image: "https://media.api-sports.io/football/players/342970.png",
-    hints: ["Defender", "France", "20 years • 190"],
-  },
-  {
-    id: 286962,
-    name: "Lucas Freitas",
-    image: "https://media.api-sports.io/football/players/286962.png",
-    hints: ["Defender", "Brazil", "25 years • 184"],
-  },
-  {
-    id: 31009,
-    name: "A. Bastoni",
-    image: "https://media.api-sports.io/football/players/31009.png",
-    hints: ["Defender", "Italy", "26 years • 190"],
-  },
-  {
-    id: 18959,
-    name: "Robert Sánchez",
-    image: "https://media.api-sports.io/football/players/18959.png",
-    hints: ["Goalkeeper", "Spain", "28 years • 197"],
-  },
-  {
-    id: 31010,
-    name: "F. Dimarco",
-    image: "https://media.api-sports.io/football/players/31010.png",
-    hints: ["Defender", "Italy", "28 years • 175"],
-  },
-  {
-    id: 226,
-    name: "D. Dumfries",
-    image: "https://media.api-sports.io/football/players/226.png",
-    hints: ["Defender", "Netherlands", "29 years • 188"],
-  },
-  {
-    id: 158697,
-    name: "J. McAtee",
-    image: "https://media.api-sports.io/football/players/158697.png",
-    hints: ["Midfielder", "England", "23 years • 180"],
-  },
-  {
-    id: 161907,
-    name: "M. Gusto",
-    image: "https://media.api-sports.io/football/players/161907.png",
-    hints: ["Defender", "France", "22 years • 179"],
-  },
-  {
-    id: 33584,
-    name: "Y. Shoji",
-    image: "https://media.api-sports.io/football/players/33584.png",
-    hints: ["Midfielder", "Japan", "36 years • 175 cm"],
-  },
-  {
-    id: 319012,
-    name: "R. Mito",
-    image: "https://media.api-sports.io/football/players/319012.png",
-    hints: ["Midfielder", "Japan", "23 years • 180"],
-  },
-  {
-    id: 116,
-    name: "K. Thuram",
-    image: "https://media.api-sports.io/football/players/116.png",
-    hints: ["Midfielder", "France", "24 years • 192"],
-  },
-  {
-    id: 127011,
-    name: "A. Cambiaso",
-    image: "https://media.api-sports.io/football/players/127011.png",
-    hints: ["Defender", "Italy", "25 years • 182"],
-  },
-  {
-    id: 31173,
-    name: "D. Frattesi",
-    image: "https://media.api-sports.io/football/players/31173.png",
-    hints: ["Midfielder", "Italy", "26 years • 178"],
-  },
-  {
-    id: 396380,
-    name: "Z. Athekame",
-    image: "https://media.api-sports.io/football/players/396380.png",
-    hints: ["Defender", "Switzerland", "21 years • 181"],
-  },
-  {
-    id: 10079,
-    name: "Vitor Eudes",
-    image: "https://media.api-sports.io/football/players/10079.png",
-    hints: ["Goalkeeper", "Brazil", "27 years • 196"],
-  },
-  {
-    id: 142576,
-    name: "Pedro Barcelos",
-    image: "https://media.api-sports.io/football/players/142576.png",
-    hints: ["Defender", "Brazil", "30 years • 188"],
-  },
-  {
-    id: 266813,
-    name: "W. Bondo",
-    image: "https://media.api-sports.io/football/players/266813.png",
-    hints: ["Midfielder", "France", "22 years • 177"],
-  },
-  {
-    id: 9880,
-    name: "J. Cazares",
-    image: "https://media.api-sports.io/football/players/9880.png",
-    hints: ["Midfielder", "Ecuador", "33 years • 170"],
-  },
-  {
-    id: 22221,
-    name: "M. Maignan",
-    image: "https://media.api-sports.io/football/players/22221.png",
-    hints: ["Goalkeeper", "France", "30 years • 191"],
-  },
-  {
-    id: 123759,
-    name: "Hugo Souza",
-    image: "https://media.api-sports.io/football/players/123759.png",
-    hints: ["Goalkeeper", "Brazil", "27 years • 199"],
-  },
-  {
-    id: 392104,
-    name: "Arthur Sousa",
-    image: "https://media.api-sports.io/football/players/392104.png",
-    hints: ["Forward", "Brazil", "22 years • 184"],
-  },
-  {
-    id: 1145,
-    name: "I. Konaté",
-    image: "https://media.api-sports.io/football/players/1145.png",
-    hints: ["Defender", "France", "26 years • 194"],
-  },
+    "id": 353034,
+    "name": "Cuiabano",
+    "image": "https://media.api-sports.io/football/players/353034.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "23 anos • 181"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.14",
+      "goals": 4,
+      "assists": 1,
+      "matches": 28,
+      "passAccuracy": 0,
+      "dribbles": 10,
+      "tackles": 49,
+      "yellowCards": 5
+    },
+    "funFact": ""
+  },
+  {
+    "id": 474269,
+    "name": "Thauan Willians",
+    "image": "https://media.api-sports.io/football/players/474269.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "21 anos • 182"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 1,
+      "matches": 10,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 2,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 199324,
+    "name": "Gabriel Barros",
+    "image": "https://media.api-sports.io/football/players/199324.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "24 anos • 182"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/119.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 362886,
+    "name": "Zé Welinton",
+    "image": "https://media.api-sports.io/football/players/362886.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos • 170"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 30763,
+    "name": "Jandrei",
+    "image": "https://media.api-sports.io/football/players/30763.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "32 anos • 187"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/126.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.09",
+      "goals": 0,
+      "assists": 0,
+      "matches": 37,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 279800,
+    "name": "Vanderlan",
+    "image": "https://media.api-sports.io/football/players/279800.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "23 anos • 183"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.67",
+      "goals": 0,
+      "assists": 3,
+      "matches": 37,
+      "passAccuracy": 0,
+      "dribbles": 7,
+      "tackles": 25,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 403299,
+    "name": "Daniel Sales",
+    "image": "https://media.api-sports.io/football/players/403299.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "19 anos • 178"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 5,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 51701,
+    "name": "M. Araújo",
+    "image": "https://media.api-sports.io/football/players/51701.png",
+    "hints": [
+      "Midfielder",
+      "Uruguay",
+      "29 anos • 178"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/126.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.74",
+      "goals": 0,
+      "assists": 1,
+      "matches": 20,
+      "passAccuracy": 0,
+      "dribbles": 21,
+      "tackles": 27,
+      "yellowCards": 4
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9849,
+    "name": "Matheusinho",
+    "image": "https://media.api-sports.io/football/players/9849.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "28 anos • 165 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Mineiro - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 1,
+      "assists": 0,
+      "matches": 4,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 51466,
+    "name": "J. Piquerez",
+    "image": "https://media.api-sports.io/football/players/51466.png",
+    "hints": [
+      "Defender",
+      "Uruguay",
+      "27 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.17",
+      "goals": 2,
+      "assists": 0,
+      "matches": 17,
+      "passAccuracy": 0,
+      "dribbles": 8,
+      "tackles": 27,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 309634,
+    "name": "Gabriel Grando",
+    "image": "https://media.api-sports.io/football/players/309634.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "25 anos • 181"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 80484,
+    "name": "Mayk",
+    "image": "https://media.api-sports.io/football/players/80484.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "26 anos • 172"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.77",
+      "goals": 0,
+      "assists": 0,
+      "matches": 22,
+      "passAccuracy": 0,
+      "dribbles": 5,
+      "tackles": 8,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10387,
+    "name": "Edenílson",
+    "image": "https://media.api-sports.io/football/players/10387.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "36 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.67",
+      "goals": 1,
+      "assists": 1,
+      "matches": 33,
+      "passAccuracy": 0,
+      "dribbles": 12,
+      "tackles": 17,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 306706,
+    "name": "A. Giay",
+    "image": "https://media.api-sports.io/football/players/306706.png",
+    "hints": [
+      "Defender",
+      "Argentina",
+      "22 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.90",
+      "goals": 0,
+      "assists": 0,
+      "matches": 10,
+      "passAccuracy": 0,
+      "dribbles": 4,
+      "tackles": 30,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 1793,
+    "name": "Luiz Adriano",
+    "image": "https://media.api-sports.io/football/players/1793.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "38 anos • 184 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/119.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 4,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 452,
+    "name": "Fernando",
+    "image": "https://media.api-sports.io/football/players/452.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "38 anos • 183"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/119.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.92",
+      "goals": 1,
+      "assists": 0,
+      "matches": 25,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 30,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 363323,
+    "name": "Alexsander",
+    "image": "https://media.api-sports.io/football/players/363323.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "22 anos • 178"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.73",
+      "goals": 0,
+      "assists": 1,
+      "matches": 18,
+      "passAccuracy": 0,
+      "dribbles": 18,
+      "tackles": 24,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 6260,
+    "name": "M. Capasso",
+    "image": "https://media.api-sports.io/football/players/6260.png",
+    "hints": [
+      "Defender",
+      "Argentina",
+      "29 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 1,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 160226,
+    "name": "Gustavo Apis Pascoal de Farias",
+    "image": "https://media.api-sports.io/football/players/160226.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "26 anos • 176 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 4,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 41274,
+    "name": "Aloísio Souza",
+    "image": "https://media.api-sports.io/football/players/41274.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "29 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "7.10",
+      "goals": 0,
+      "assists": 0,
+      "matches": 15,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 13,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 133910,
+    "name": "Paulo Henrique",
+    "image": "https://media.api-sports.io/football/players/133910.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "29 anos • 175"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.86",
+      "goals": 1,
+      "assists": 0,
+      "matches": 35,
+      "passAccuracy": 0,
+      "dribbles": 47,
+      "tackles": 96,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9939,
+    "name": "Dudu",
+    "image": "https://media.api-sports.io/football/players/9939.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "34 anos • 167"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.78",
+      "goals": 0,
+      "assists": 0,
+      "matches": 27,
+      "passAccuracy": 0,
+      "dribbles": 13,
+      "tackles": 5,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9946,
+    "name": "Reinaldo",
+    "image": "https://media.api-sports.io/football/players/9946.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "36 anos • 178"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.98",
+      "goals": 3,
+      "assists": 2,
+      "matches": 30,
+      "passAccuracy": 0,
+      "dribbles": 27,
+      "tackles": 55,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10163,
+    "name": "Renê",
+    "image": "https://media.api-sports.io/football/players/10163.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "33 anos • 174"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Copa Do Brasil",
+    "stats": {
+      "rating": "7.04",
+      "goals": 1,
+      "assists": 1,
+      "matches": 29,
+      "passAccuracy": 48,
+      "dribbles": 18,
+      "tackles": 50,
+      "yellowCards": 5
+    },
+    "funFact": ""
+  },
+  {
+    "id": 6725,
+    "name": "F. Vera",
+    "image": "https://media.api-sports.io/football/players/6725.png",
+    "hints": [
+      "Midfielder",
+      "Argentina",
+      "25 anos • 179"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.96",
+      "goals": 2,
+      "assists": 0,
+      "matches": 20,
+      "passAccuracy": 0,
+      "dribbles": 13,
+      "tackles": 31,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10067,
+    "name": "Alex Santana",
+    "image": "https://media.api-sports.io/football/players/10067.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "30 anos • 182"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.38",
+      "goals": 0,
+      "assists": 0,
+      "matches": 12,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 2,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 1771,
+    "name": "Ayrton Lucas",
+    "image": "https://media.api-sports.io/football/players/1771.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "28 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.98",
+      "goals": 3,
+      "assists": 3,
+      "matches": 32,
+      "passAccuracy": 0,
+      "dribbles": 31,
+      "tackles": 45,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 306210,
+    "name": "Matheus Cunha",
+    "image": "https://media.api-sports.io/football/players/306210.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "24 anos • 181"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Copa Do Brasil",
+    "stats": {
+      "rating": "7.07",
+      "goals": 0,
+      "assists": 0,
+      "matches": 9,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 191872,
+    "name": "Carlos Alberto",
+    "image": "https://media.api-sports.io/football/players/191872.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "23 anos • 179"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.66",
+      "goals": 1,
+      "assists": 0,
+      "matches": 7,
+      "passAccuracy": 0,
+      "dribbles": 4,
+      "tackles": 3,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 237160,
+    "name": "S. Ocampos",
+    "image": "https://media.api-sports.io/football/players/237160.png",
+    "hints": [
+      "Defender",
+      "Paraguay",
+      "24 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 415115,
+    "name": "Caio Maia",
+    "image": "https://media.api-sports.io/football/players/415115.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "20 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.60",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 411433,
+    "name": "Zé Guilherme",
+    "image": "https://media.api-sports.io/football/players/411433.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "20 anos • 181"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.85",
+      "goals": 0,
+      "assists": 0,
+      "matches": 7,
+      "passAccuracy": 0,
+      "dribbles": 6,
+      "tackles": 11,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10237,
+    "name": "Manoel",
+    "image": "https://media.api-sports.io/football/players/10237.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "35 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.71",
+      "goals": 0,
+      "assists": 0,
+      "matches": 25,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 13,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 415089,
+    "name": "Gabriel Moscardo",
+    "image": "https://media.api-sports.io/football/players/415089.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "20 anos • 185"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.60",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 4,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10203,
+    "name": "Gustavo Campanharo",
+    "image": "https://media.api-sports.io/football/players/10203.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "33 anos • 178 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/119.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 422763,
+    "name": "Wesley",
+    "image": "https://media.api-sports.io/football/players/422763.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "CONMEBOL Libertadores",
+    "stats": {
+      "rating": "6.20",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 1,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 419936,
+    "name": "Nathan Fernandes",
+    "image": "https://media.api-sports.io/football/players/419936.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "21 anos • 193"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.61",
+      "goals": 0,
+      "assists": 0,
+      "matches": 25,
+      "passAccuracy": 0,
+      "dribbles": 18,
+      "tackles": 8,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10229,
+    "name": "Cássio",
+    "image": "https://media.api-sports.io/football/players/10229.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "38 anos • 195"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.71",
+      "goals": 0,
+      "assists": 0,
+      "matches": 10,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 860,
+    "name": "Alex Sandro",
+    "image": "https://media.api-sports.io/football/players/860.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "35 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.30",
+      "goals": 0,
+      "assists": 1,
+      "matches": 8,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 12,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 299148,
+    "name": "Felipe Amaral",
+    "image": "https://media.api-sports.io/football/players/299148.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "22 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.72",
+      "goals": 0,
+      "assists": 0,
+      "matches": 35,
+      "passAccuracy": 0,
+      "dribbles": 6,
+      "tackles": 17,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9911,
+    "name": "Lucas Esteves",
+    "image": "https://media.api-sports.io/football/players/9911.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "25 anos • 170"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.07",
+      "goals": 1,
+      "assists": 4,
+      "matches": 35,
+      "passAccuracy": 0,
+      "dribbles": 21,
+      "tackles": 60,
+      "yellowCards": 10
+    },
+    "funFact": ""
+  },
+  {
+    "id": 415160,
+    "name": "Paulinho",
+    "image": "https://media.api-sports.io/football/players/415160.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "21 anos • 183"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 0,
+      "matches": 9,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 1,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 36784,
+    "name": "D. Palacios",
+    "image": "https://media.api-sports.io/football/players/36784.png",
+    "hints": [
+      "Defender",
+      "Ecuador",
+      "26 anos • 169"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.90",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9916,
+    "name": "Marcos Rocha",
+    "image": "https://media.api-sports.io/football/players/9916.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "37 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.06",
+      "goals": 0,
+      "assists": 2,
+      "matches": 28,
+      "passAccuracy": 0,
+      "dribbles": 8,
+      "tackles": 55,
+      "yellowCards": 5
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9954,
+    "name": "Rodrigo Nestor",
+    "image": "https://media.api-sports.io/football/players/9954.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "25 anos • 175"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/126.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.78",
+      "goals": 0,
+      "assists": 2,
+      "matches": 34,
+      "passAccuracy": 0,
+      "dribbles": 7,
+      "tackles": 16,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 157615,
+    "name": "Dalberson",
+    "image": "https://media.api-sports.io/football/players/157615.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "29 anos • 191"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.91",
+      "goals": 0,
+      "assists": 0,
+      "matches": 15,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 352387,
+    "name": "Zé Vitor",
+    "image": "https://media.api-sports.io/football/players/352387.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "23 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10388,
+    "name": "Patrick",
+    "image": "https://media.api-sports.io/football/players/10388.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "33 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Mineiro - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 415631,
+    "name": "Fabiano",
+    "image": "https://media.api-sports.io/football/players/415631.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "19 anos • 183"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "CONMEBOL Libertadores",
+    "stats": {
+      "rating": "6.20",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 449253,
+    "name": "João Victor Cunha",
+    "image": "https://media.api-sports.io/football/players/449253.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "19 anos • 187"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10081,
+    "name": "Rafael",
+    "image": "https://media.api-sports.io/football/players/10081.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "36 anos • 192"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/126.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.07",
+      "goals": 0,
+      "assists": 0,
+      "matches": 30,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9880,
+    "name": "J. Cazares",
+    "image": "https://media.api-sports.io/football/players/9880.png",
+    "hints": [
+      "Midfielder",
+      "Ecuador",
+      "33 anos • 170"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/128.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.86",
+      "goals": 1,
+      "assists": 0,
+      "matches": 11,
+      "passAccuracy": 0,
+      "dribbles": 2,
+      "tackles": 3,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 2513,
+    "name": "M. Rojas",
+    "image": "https://media.api-sports.io/football/players/2513.png",
+    "hints": [
+      "Midfielder",
+      "Paraguay",
+      "30 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.96",
+      "goals": 0,
+      "assists": 1,
+      "matches": 9,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 6,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10080,
+    "name": "Fábio",
+    "image": "https://media.api-sports.io/football/players/10080.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "45 anos • 189"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.15",
+      "goals": 0,
+      "assists": 0,
+      "matches": 37,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 2,
+      "yellowCards": 4
+    },
+    "funFact": ""
+  },
+  {
+    "id": 454614,
+    "name": "Yago Kauã",
+    "image": "https://media.api-sports.io/football/players/454614.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "20 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10083,
+    "name": "Murilo",
+    "image": "https://media.api-sports.io/football/players/10083.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "28 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.06",
+      "goals": 1,
+      "assists": 0,
+      "matches": 27,
+      "passAccuracy": 0,
+      "dribbles": 7,
+      "tackles": 37,
+      "yellowCards": 7
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9989,
+    "name": "Felipe Jonatan",
+    "image": "https://media.api-sports.io/football/players/9989.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "28 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/128.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.89",
+      "goals": 0,
+      "assists": 2,
+      "matches": 13,
+      "passAccuracy": 0,
+      "dribbles": 6,
+      "tackles": 13,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 280245,
+    "name": "Martinelli",
+    "image": "https://media.api-sports.io/football/players/280245.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "24 anos • 177"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.78",
+      "goals": 1,
+      "assists": 1,
+      "matches": 35,
+      "passAccuracy": 43,
+      "dribbles": 23,
+      "tackles": 42,
+      "yellowCards": 9
+    },
+    "funFact": ""
+  },
+  {
+    "id": 311446,
+    "name": "Thauan Lara",
+    "image": "https://media.api-sports.io/football/players/311446.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/119.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10085,
+    "name": "Cacá",
+    "image": "https://media.api-sports.io/football/players/10085.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "26 anos • 187"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.02",
+      "goals": 4,
+      "assists": 1,
+      "matches": 34,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 29,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10017,
+    "name": "Ignacio",
+    "image": "https://media.api-sports.io/football/players/10017.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "29 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.92",
+      "goals": 0,
+      "assists": 0,
+      "matches": 8,
+      "passAccuracy": 42,
+      "dribbles": 1,
+      "tackles": 11,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10234,
+    "name": "Lucas Piton",
+    "image": "https://media.api-sports.io/football/players/10234.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "25 anos • 175"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.94",
+      "goals": 1,
+      "assists": 5,
+      "matches": 34,
+      "passAccuracy": 0,
+      "dribbles": 28,
+      "tackles": 64,
+      "yellowCards": 4
+    },
+    "funFact": ""
+  },
+  {
+    "id": 123759,
+    "name": "Hugo Souza",
+    "image": "https://media.api-sports.io/football/players/123759.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "27 anos • 199"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.19",
+      "goals": 0,
+      "assists": 0,
+      "matches": 22,
+      "passAccuracy": 0,
+      "dribbles": 2,
+      "tackles": 0,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9905,
+    "name": "Diogo Barbosa",
+    "image": "https://media.api-sports.io/football/players/9905.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "33 anos • 179"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.83",
+      "goals": 0,
+      "assists": 0,
+      "matches": 29,
+      "passAccuracy": 0,
+      "dribbles": 15,
+      "tackles": 37,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 408347,
+    "name": "Rubens",
+    "image": "https://media.api-sports.io/football/players/408347.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "22 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 266019,
+    "name": "Diegão",
+    "image": "https://media.api-sports.io/football/players/266019.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos • 182 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 197533,
+    "name": "Praxedes",
+    "image": "https://media.api-sports.io/football/players/197533.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "24 anos • 185"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 1,
+      "assists": 0,
+      "matches": 7,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 2466,
+    "name": "W. Kannemann",
+    "image": "https://media.api-sports.io/football/players/2466.png",
+    "hints": [
+      "Defender",
+      "Argentina",
+      "34 anos • 185"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.78",
+      "goals": 0,
+      "assists": 2,
+      "matches": 15,
+      "passAccuracy": 0,
+      "dribbles": 6,
+      "tackles": 18,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 195499,
+    "name": "Matheus Donelli",
+    "image": "https://media.api-sports.io/football/players/195499.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "23 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.04",
+      "goals": 0,
+      "assists": 0,
+      "matches": 32,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 51426,
+    "name": "J. Rodríguez",
+    "image": "https://media.api-sports.io/football/players/51426.png",
+    "hints": [
+      "Defender",
+      "Uruguay",
+      "28 anos • 183"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.86",
+      "goals": 1,
+      "assists": 2,
+      "matches": 22,
+      "passAccuracy": 0,
+      "dribbles": 5,
+      "tackles": 20,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 30524,
+    "name": "M. Lemos",
+    "image": "https://media.api-sports.io/football/players/30524.png",
+    "hints": [
+      "Defender",
+      "Uruguay",
+      "30 anos • 187"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.81",
+      "goals": 0,
+      "assists": 0,
+      "matches": 19,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 3,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 305829,
+    "name": "Rodrigo",
+    "image": "https://media.api-sports.io/football/players/305829.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "23 anos • 176 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 180386,
+    "name": "M. Segovia",
+    "image": "https://media.api-sports.io/football/players/180386.png",
+    "hints": [
+      "Forward",
+      "Paraguay",
+      "23 anos • 167"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 340067,
+    "name": "Cleiton",
+    "image": "https://media.api-sports.io/football/players/340067.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.20",
+      "goals": 0,
+      "assists": 0,
+      "matches": 27,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 2,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 415049,
+    "name": "Gabriel Carvalho",
+    "image": "https://media.api-sports.io/football/players/415049.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "18 anos • 168"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/119.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.93",
+      "goals": 1,
+      "assists": 3,
+      "matches": 35,
+      "passAccuracy": 0,
+      "dribbles": 30,
+      "tackles": 27,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 63964,
+    "name": "F. Torres",
+    "image": "https://media.api-sports.io/football/players/63964.png",
+    "hints": [
+      "Defender",
+      "Ecuador",
+      "29 anos • 187"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.73",
+      "goals": 0,
+      "assists": 0,
+      "matches": 24,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 22,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9936,
+    "name": "Willian",
+    "image": "https://media.api-sports.io/football/players/9936.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "39 anos • 171"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/128.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.68",
+      "goals": 5,
+      "assists": 1,
+      "matches": 29,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 10,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 349001,
+    "name": "Wesley",
+    "image": "https://media.api-sports.io/football/players/349001.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos • 173"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.06",
+      "goals": 0,
+      "assists": 2,
+      "matches": 31,
+      "passAccuracy": 0,
+      "dribbles": 28,
+      "tackles": 69,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 51587,
+    "name": "F. Labandeira",
+    "image": "https://media.api-sports.io/football/players/51587.png",
+    "hints": [
+      "Forward",
+      "Uruguay",
+      "29 anos • 173"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.79",
+      "goals": 4,
+      "assists": 2,
+      "matches": 25,
+      "passAccuracy": 0,
+      "dribbles": 5,
+      "tackles": 16,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 2502,
+    "name": "G. Gómez",
+    "image": "https://media.api-sports.io/football/players/2502.png",
+    "hints": [
+      "Defender",
+      "Paraguay",
+      "32 anos • 185"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.13",
+      "goals": 1,
+      "assists": 2,
+      "matches": 27,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 40,
+      "yellowCards": 9
+    },
+    "funFact": ""
+  },
+  {
+    "id": 345756,
+    "name": "M. Terceros",
+    "image": "https://media.api-sports.io/football/players/345756.png",
+    "hints": [
+      "Midfielder",
+      "Bolivia",
+      "21 anos • 177"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/128.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.42",
+      "goals": 0,
+      "assists": 0,
+      "matches": 5,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 987,
+    "name": "Paulinho",
+    "image": "https://media.api-sports.io/football/players/987.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "25 anos • 177"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Mineiro - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 2,
+      "assists": 0,
+      "matches": 11,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9874,
+    "name": "Guga",
+    "image": "https://media.api-sports.io/football/players/9874.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "27 anos • 173"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.78",
+      "goals": 0,
+      "assists": 1,
+      "matches": 34,
+      "passAccuracy": 0,
+      "dribbles": 2,
+      "tackles": 10,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 195109,
+    "name": "Patrick de Paula",
+    "image": "https://media.api-sports.io/football/players/195109.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "26 anos • 178"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Copa Do Brasil",
+    "stats": {
+      "rating": "7.00",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 1,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9458,
+    "name": "Léo Ortiz",
+    "image": "https://media.api-sports.io/football/players/9458.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "30 anos • 185"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.03",
+      "goals": 1,
+      "assists": 2,
+      "matches": 34,
+      "passAccuracy": 0,
+      "dribbles": 7,
+      "tackles": 32,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 392104,
+    "name": "Arthur Sousa",
+    "image": "https://media.api-sports.io/football/players/392104.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "22 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.44",
+      "goals": 0,
+      "assists": 0,
+      "matches": 11,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 142576,
+    "name": "Pedro Barcelos",
+    "image": "https://media.api-sports.io/football/players/142576.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "30 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.90",
+      "goals": 0,
+      "assists": 0,
+      "matches": 13,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 1,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 311275,
+    "name": "Gabriel Delfim",
+    "image": "https://media.api-sports.io/football/players/311275.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "23 anos • 189"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.90",
+      "goals": 0,
+      "assists": 0,
+      "matches": 17,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9891,
+    "name": "D. Terans",
+    "image": "https://media.api-sports.io/football/players/9891.png",
+    "hints": [
+      "Midfielder",
+      "Uruguay",
+      "31 anos • 172"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.66",
+      "goals": 0,
+      "assists": 0,
+      "matches": 21,
+      "passAccuracy": 0,
+      "dribbles": 4,
+      "tackles": 6,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 2410,
+    "name": "Weverton",
+    "image": "https://media.api-sports.io/football/players/2410.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "38 anos • 189"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.27",
+      "goals": 0,
+      "assists": 1,
+      "matches": 38,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 1,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 238357,
+    "name": "Kayque",
+    "image": "https://media.api-sports.io/football/players/238357.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "25 anos • 175 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 352376,
+    "name": "Rodriguinho",
+    "image": "https://media.api-sports.io/football/players/352376.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "22 anos • 171"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "7.25",
+      "goals": 4,
+      "assists": 2,
+      "matches": 25,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 20,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 353394,
+    "name": "Janderson",
+    "image": "https://media.api-sports.io/football/players/353394.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "26 anos • 186"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "CONMEBOL Libertadores",
+    "stats": {
+      "rating": "6.47",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 1262,
+    "name": "Otávio",
+    "image": "https://media.api-sports.io/football/players/1262.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "31 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.88",
+      "goals": 0,
+      "assists": 0,
+      "matches": 27,
+      "passAccuracy": 42,
+      "dribbles": 10,
+      "tackles": 54,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 286962,
+    "name": "Lucas Freitas",
+    "image": "https://media.api-sports.io/football/players/286962.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "25 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.78",
+      "goals": 0,
+      "assists": 0,
+      "matches": 30,
+      "passAccuracy": 0,
+      "dribbles": 2,
+      "tackles": 9,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 415163,
+    "name": "Kauã",
+    "image": "https://media.api-sports.io/football/players/415163.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "21 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.30",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 304867,
+    "name": "Gustavo Martins",
+    "image": "https://media.api-sports.io/football/players/304867.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "23 anos • 191"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.69",
+      "goals": 2,
+      "assists": 0,
+      "matches": 19,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 23,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 36171,
+    "name": "F. Elizari",
+    "image": "https://media.api-sports.io/football/players/36171.png",
+    "hints": [
+      "Midfielder",
+      "Argentina",
+      "34 anos • 173"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/125.png",
+    "leagueName": "Serie B",
+    "stats": {
+      "rating": "6.96",
+      "goals": 2,
+      "assists": 2,
+      "matches": 19,
+      "passAccuracy": 0,
+      "dribbles": 9,
+      "tackles": 6,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 109559,
+    "name": "Serginho",
+    "image": "https://media.api-sports.io/football/players/109559.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "30 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 3,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 197017,
+    "name": "Matheus Mendes",
+    "image": "https://media.api-sports.io/football/players/197017.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "26 anos • 190"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.14",
+      "goals": 0,
+      "assists": 0,
+      "matches": 13,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 152858,
+    "name": "Jhonata Robert",
+    "image": "https://media.api-sports.io/football/players/152858.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "26 anos • 179"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Gaúcho - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 13572,
+    "name": "G. Fuentes",
+    "image": "https://media.api-sports.io/football/players/13572.png",
+    "hints": [
+      "Defender",
+      "Colombia",
+      "29 anos • 181"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.62",
+      "goals": 0,
+      "assists": 0,
+      "matches": 6,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 4,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 403307,
+    "name": "Julião",
+    "image": "https://media.api-sports.io/football/players/403307.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "22 anos • 178 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 2,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 50532,
+    "name": "Lima",
+    "image": "https://media.api-sports.io/football/players/50532.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "29 anos • 181"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.83",
+      "goals": 4,
+      "assists": 1,
+      "matches": 31,
+      "passAccuracy": 0,
+      "dribbles": 24,
+      "tackles": 39,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 30443,
+    "name": "Rafael Cabral",
+    "image": "https://media.api-sports.io/football/players/30443.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "35 anos • 186"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/130.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 0,
+      "matches": 21,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 41180,
+    "name": "Messias",
+    "image": "https://media.api-sports.io/football/players/41180.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "31 anos • 190"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/128.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 0,
+      "matches": 15,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 96,
+    "name": "Jemerson",
+    "image": "https://media.api-sports.io/football/players/96.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "33 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Mineiro - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 11,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 5
+    },
+    "funFact": ""
+  },
+  {
+    "id": 22231,
+    "name": "Thiago Maia",
+    "image": "https://media.api-sports.io/football/players/22231.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "28 anos • 179"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 50081,
+    "name": "David Braz",
+    "image": "https://media.api-sports.io/football/players/50081.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "38 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.86",
+      "goals": 0,
+      "assists": 0,
+      "matches": 22,
+      "passAccuracy": 0,
+      "dribbles": 4,
+      "tackles": 13,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 12797,
+    "name": "Alex Teixeira",
+    "image": "https://media.api-sports.io/football/players/12797.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "36 anos • 173"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.01",
+      "goals": 1,
+      "assists": 1,
+      "matches": 7,
+      "passAccuracy": 0,
+      "dribbles": 4,
+      "tackles": 2,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9958,
+    "name": "Tchê Tchê",
+    "image": "https://media.api-sports.io/football/players/9958.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "33 anos • 176"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Carioca - 1",
+    "stats": {
+      "rating": "6.80",
+      "goals": 0,
+      "assists": 0,
+      "matches": 34,
+      "passAccuracy": 0,
+      "dribbles": 10,
+      "tackles": 16,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10124,
+    "name": "Léo Pereira",
+    "image": "https://media.api-sports.io/football/players/10124.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "30 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.94",
+      "goals": 0,
+      "assists": 0,
+      "matches": 32,
+      "passAccuracy": 40,
+      "dribbles": 6,
+      "tackles": 31,
+      "yellowCards": 5
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10432,
+    "name": "Júnior Santos",
+    "image": "https://media.api-sports.io/football/players/10432.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "31 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.90",
+      "goals": 4,
+      "assists": 1,
+      "matches": 25,
+      "passAccuracy": 0,
+      "dribbles": 26,
+      "tackles": 12,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 41169,
+    "name": "Léo Jardim",
+    "image": "https://media.api-sports.io/football/players/41169.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "30 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.17",
+      "goals": 0,
+      "assists": 0,
+      "matches": 38,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10225,
+    "name": "João Victor",
+    "image": "https://media.api-sports.io/football/players/10225.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "27 anos • 187"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.87",
+      "goals": 1,
+      "assists": 1,
+      "matches": 28,
+      "passAccuracy": 0,
+      "dribbles": 4,
+      "tackles": 33,
+      "yellowCards": 5
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10379,
+    "name": "Bruno Fuchs",
+    "image": "https://media.api-sports.io/football/players/10379.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "26 anos • 190"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.02",
+      "goals": 0,
+      "assists": 1,
+      "matches": 31,
+      "passAccuracy": 52,
+      "dribbles": 8,
+      "tackles": 43,
+      "yellowCards": 7
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10267,
+    "name": "Samuel Xavier",
+    "image": "https://media.api-sports.io/football/players/10267.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "35 anos • 167"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.99",
+      "goals": 0,
+      "assists": 2,
+      "matches": 32,
+      "passAccuracy": 40,
+      "dribbles": 9,
+      "tackles": 52,
+      "yellowCards": 4
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10372,
+    "name": "Marcelo Lomba",
+    "image": "https://media.api-sports.io/football/players/10372.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "39 anos • 189"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "7.10",
+      "goals": 0,
+      "assists": 0,
+      "matches": 13,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 80534,
+    "name": "Caetano",
+    "image": "https://media.api-sports.io/football/players/80534.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "26 anos • 182"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/131.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.71",
+      "goals": 0,
+      "assists": 0,
+      "matches": 9,
+      "passAccuracy": 0,
+      "dribbles": 2,
+      "tackles": 7,
+      "yellowCards": 2
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9907,
+    "name": "Victor Luís",
+    "image": "https://media.api-sports.io/football/players/9907.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "32 anos • 180"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/133.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.13",
+      "goals": 1,
+      "assists": 1,
+      "matches": 29,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 14,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9566,
+    "name": "Adryelson",
+    "image": "https://media.api-sports.io/football/players/9566.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "27 anos • 183 cm"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.21",
+      "goals": 1,
+      "assists": 0,
+      "matches": 7,
+      "passAccuracy": 52,
+      "dribbles": 0,
+      "tackles": 4,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 11756,
+    "name": "A. Rossi",
+    "image": "https://media.api-sports.io/football/players/11756.png",
+    "hints": [
+      "Goalkeeper",
+      "Argentina",
+      "30 anos • 193"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/127.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.01",
+      "goals": 0,
+      "assists": 0,
+      "matches": 35,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 1,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 195111,
+    "name": "Gabriel Menino",
+    "image": "https://media.api-sports.io/football/players/195111.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "25 anos • 177"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/121.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.91",
+      "goals": 1,
+      "assists": 0,
+      "matches": 27,
+      "passAccuracy": 0,
+      "dribbles": 11,
+      "tackles": 28,
+      "yellowCards": 7
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9340,
+    "name": "Sabino",
+    "image": "https://media.api-sports.io/football/players/9340.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "29 anos • 184"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/126.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "7.02",
+      "goals": 0,
+      "assists": 0,
+      "matches": 35,
+      "passAccuracy": 45,
+      "dribbles": 3,
+      "tackles": 19,
+      "yellowCards": 3
+    },
+    "funFact": ""
+  },
+  {
+    "id": 5981,
+    "name": "C. Pavón",
+    "image": "https://media.api-sports.io/football/players/5981.png",
+    "hints": [
+      "Forward",
+      "Argentina",
+      "30 anos • 167"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Mineiro - 1",
+    "stats": {
+      "rating": "6.5",
+      "goals": 0,
+      "assists": 0,
+      "matches": 4,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 0,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 278337,
+    "name": "Marcelinho",
+    "image": "https://media.api-sports.io/football/players/278337.png",
+    "hints": [
+      "Forward",
+      "Brazil",
+      "23 anos"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/128.png",
+    "leagueName": "Paulista - A1",
+    "stats": {
+      "rating": "6.56",
+      "goals": 0,
+      "assists": 0,
+      "matches": 12,
+      "passAccuracy": 0,
+      "dribbles": 3,
+      "tackles": 3,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  },
+  {
+    "id": 9978,
+    "name": "Everson",
+    "image": "https://media.api-sports.io/football/players/9978.png",
+    "hints": [
+      "Goalkeeper",
+      "Brazil",
+      "35 anos • 192"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/1062.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.89",
+      "goals": 0,
+      "assists": 0,
+      "matches": 24,
+      "passAccuracy": 0,
+      "dribbles": 0,
+      "tackles": 1,
+      "yellowCards": 6
+    },
+    "funFact": ""
+  },
+  {
+    "id": 1260,
+    "name": "Pablo",
+    "image": "https://media.api-sports.io/football/players/1260.png",
+    "hints": [
+      "Defender",
+      "Brazil",
+      "34 anos • 188"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/120.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.70",
+      "goals": 0,
+      "assists": 0,
+      "matches": 1,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 1,
+      "yellowCards": 0
+    },
+    "funFact": ""
+  },
+  {
+    "id": 10396,
+    "name": "Nonato",
+    "image": "https://media.api-sports.io/football/players/10396.png",
+    "hints": [
+      "Midfielder",
+      "Brazil",
+      "27 anos • 174"
+    ],
+    "clubLogo": "https://media.api-sports.io/football/teams/124.png",
+    "leagueName": "Serie A",
+    "stats": {
+      "rating": "6.66",
+      "goals": 0,
+      "assists": 1,
+      "matches": 10,
+      "passAccuracy": 0,
+      "dribbles": 1,
+      "tackles": 15,
+      "yellowCards": 1
+    },
+    "funFact": ""
+  }
 ];
