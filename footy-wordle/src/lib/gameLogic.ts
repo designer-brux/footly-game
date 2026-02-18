@@ -2,16 +2,15 @@ import { PLAYERS, Player } from "@/data/players";
 
 // ==============================================================================
 // CONFIGURAÇÃO DO DIA ZERO
-// ==============================================================================
 // Data de lançamento: 9 de Fevereiro de 2026
+// ==============================================================================
 const EPOCH_YEAR = 2026;
-const EPOCH_MONTH = 1; // Fevereiro é 1 (Janeiro é 0)
+const EPOCH_MONTH = 1; // Fevereiro é 1 (Janeiro é 0 no JS)
 const EPOCH_DAY = 9;
 
 /**
  * 1. LÓGICA DO JOGO (LOCAL)
  * Calcula o índice baseado na MEIA-NOITE LOCAL do usuário.
- * Se eu estou no Brasil, vira 00:00 BRT. Se estou no Japão, vira 00:00 JST.
  */
 export function getLocalDayIndex(offset = 0): number {
   const now = new Date();
@@ -22,7 +21,7 @@ export function getLocalDayIndex(offset = 0): number {
   // Zera horas/minutos para comparar apenas datas puras LOCAIS
   now.setHours(0, 0, 0, 0);
 
-  // Cria a data Epoch também no horário local (00:00 do dia 9/02)
+  // Cria a data Epoch também no horário local
   const epochLocal = new Date(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY, 0, 0, 0, 0);
 
   const oneDay = 1000 * 60 * 60 * 24;
@@ -34,7 +33,6 @@ export function getLocalDayIndex(offset = 0): number {
 /**
  * 2. LÓGICA DO BLOG (SAFE GLOBAL)
  * O Blog só atualiza quando for 12:00 PM (Meio-dia) UTC.
- * Isso garante que o dia anterior acabou até no último fuso horário (Baker Island).
  */
 export function getSafeBlogGameIndex(): number {
   const now = new Date();
@@ -59,18 +57,15 @@ export function getSafeBlogGameIndex(): number {
 /**
  * 3. BUSCADOR UNIVERSAL
  * Recebe o NÚMERO DO JOGO (Index) e retorna os jogadores.
- * Não importa se o index veio do horário local ou do horário do blog.
  */
 export function getPlayersByIndex(gameIndex: number) {
   const safeIndex = Math.abs(gameIndex);
 
-  // Matemática fixa para selecionar o trio
   const p1 = PLAYERS[safeIndex % PLAYERS.length];
   const p2 = PLAYERS[(safeIndex + 13) % PLAYERS.length];
   const p3 = PLAYERS[(safeIndex + 27) % PLAYERS.length];
 
-  // Recria a data original desse jogo para exibição
-  // (Epoch + gameIndex dias)
+  // Data para exibição (usada no Blog)
   const displayDate = new Date(Date.UTC(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY));
   displayDate.setUTCDate(displayDate.getUTCDate() + gameIndex);
 
@@ -97,9 +92,20 @@ export function getDailyPlayersByOffset(offset = 0) {
   return getPlayersByIndex(localIndex);
 }
 
-// Auxiliares
+// --- AUXILIARES EXPORTADOS ---
+
 export function getGameNumber(): number {
   return getLocalDayIndex(0) + 1;
+}
+
+// [CORREÇÃO] A função que estava faltando foi readicionada aqui
+export function getFormattedDate(): string {
+  // Retorna a data local formatada para o usuário (Ex: 18/02/2026)
+  return new Date().toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
 }
 
 export function generateSlug(name: string): string {
