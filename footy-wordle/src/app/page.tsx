@@ -13,7 +13,6 @@ export default function Home() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   // MODO JOGO:
-  // Removemos 'h-dvh' e 'overflow-hidden'. Agora a página cresce se precisar.
   if (gameState === "playing") {
     return (
       <main className="min-h-screen w-full bg-white flex flex-col">
@@ -56,12 +55,13 @@ export default function Home() {
             How to play?
           </button>
 
-          <button
-            onClick={() => setIsAboutOpen(true)}
-            className="text-[#008C6E] font-bold text-sm hover:opacity-80 transition-opacity mt-2"
+          {/* NOVO BOTÃO DO BLOG: Substituindo o antigo About */}
+          <Link
+            href="/blog"
+            className="w-full h-14 bg-white flex items-center justify-center text-[#008C6E] text-lg font-bold rounded-[40px] active:scale-95 transition-transform"
           >
-            About
-          </button>
+            📚 Footly Blog
+          </Link>
         </div>
 
         {/* 3. SEÇÃO SEO (Texto) */}
@@ -82,7 +82,14 @@ export default function Home() {
             </p>
           </article>
 
+          {/* RODAPÉ: About agora está aqui junto com as políticas */}
           <div className="flex flex-wrap justify-center gap-6 text-xs font-medium text-slate-400">
+            <button
+              onClick={() => setIsAboutOpen(true)}
+              className="hover:text-[#008F66] transition-colors"
+            >
+              About
+            </button>
             <Link href="/privacy" className="hover:text-[#008F66]">
               Privacy Policy
             </Link>
